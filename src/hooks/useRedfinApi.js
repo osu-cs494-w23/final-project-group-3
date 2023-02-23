@@ -29,24 +29,8 @@ const redfinListingsReducer = (state, action) => {
   }
 }
 
-const useRedfinListingsApi = () => {
-  const [options, setOptions] = useState({
-    method: 'GET',
-    url: 'https://unofficial-redfin.p.rapidapi.com/properties/list',
-    params: {
-      region_id: '30749',
-      region_type: '6',
-      uipt: '1,2,3,4,7,8',
-      status: '9',
-      sf: '1,2,3,5,6,7',
-      num_homes: '10'
-    },
-    headers: {
-      'X-RapidAPI-Host': 'unofficial-redfin.p.rapidapi.com',
-      'X-RapidAPI-Key': process.env.REACT_APP_REDFIN_KEY
-    }
-  });
-
+const useRedfinListingsApi = (initialParams) => {
+  const [requestParams, setRequestParams] = useState(initialParams);
   const [state, dispatch] = useReducer(redfinListingsReducer, {
     isLoading: false,
     isError: false,
@@ -59,7 +43,16 @@ const useRedfinListingsApi = () => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await axios(options);
+        const result = await axios({
+          method: 'GET',
+          url: 'https://unofficial-redfin.p.rapidapi.com/properties/list',
+          params: requestParams,
+          headers: {
+            'X-RapidAPI-Host': 'unofficial-redfin.p.rapidapi.com',
+            'X-RapidAPI-Key': process.env.REACT_APP_REDFIN_KEY
+          }
+        });
+
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
         }
@@ -74,9 +67,9 @@ const useRedfinListingsApi = () => {
     return () => {
       didCancel = true;
     }
-  }, [options]);
+  }, [requestParams]);
 
-  return [state, setOptions];
+  return [state, setRequestParams];
 }
 
 export default useRedfinListingsApi;
