@@ -39,7 +39,6 @@ const useRedfinListingsApi = (initialParams) => {
 
   useEffect(() => {
     let didCancel = false;
-
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
@@ -52,7 +51,6 @@ const useRedfinListingsApi = (initialParams) => {
             'X-RapidAPI-Key': process.env.REACT_APP_REDFIN_KEY
           }
         });
-
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
         }
@@ -63,7 +61,6 @@ const useRedfinListingsApi = (initialParams) => {
       }
     };
     fetchData();
-
     return () => {
       didCancel = true;
     }
