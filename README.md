@@ -9,7 +9,7 @@
 ```
 REACT_APP_REDFIN_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
-Confirm that the key works by running your app and navigating to the localhost:3000/redfinTest page.
+Confirm that the key works by running your app and navigating to the http://localhost:3000/redfin/test page.
 
 # Getting Started with Create React App
 
