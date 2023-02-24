@@ -34,9 +34,9 @@ function RedfinTest(props) {
       <br></br>
       <h1>Listings endpoint</h1>
       <div style={{padding:'1rem', wordWrap:'break-word'}}>
-        {listings.isLoading && !autoComplete.isError ? (<p>Loading...</p>) : (
+        {listings.isLoading && !listings.isError ? (<p>Loading...</p>) : (
             <pre style={preCodeStyle}>
-              {JSON.stringify(autoComplete.data,null,2.5)}
+              {JSON.stringify(listings.data,null,2.5)}
             </pre>)}
         {listings.isError && <p>Something went wrong ...</p>}
       </div>
