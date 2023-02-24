@@ -84,7 +84,7 @@ const useRedfinListingsApi = (initialParams, verbose = false) => {
   * https://rapidapi.com/apidojo/api/unofficial-redfin
  */
 const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
-  const [requestParams, setRequestParams] = useState(initialLocation);
+  const [locationParam, setLocationParam] = useState(initialLocation);
   const [state, dispatch] = useReducer(redfinListingsReducer, {
     isLoading: false,
     isError: false,
@@ -99,7 +99,7 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
         const [reqInterceptor, responseInterceptor] = verboseAxiosInterceptor('useRedfinAutoCompleteApi', verbose);
         const result = await axiosInstance.get('/auto-complete', {
           params: {
-            location: requestParams
+            location: locationParam
           }
         });
         axiosInstance.interceptors.request.eject(reqInterceptor);
@@ -117,9 +117,9 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
     return () => {
       didCancel = true;
     }
-  }, [requestParams, verbose]);
+  }, [locationParam, verbose]);
 
-  return [state, setRequestParams];
+  return [state, setLocationParam];
 }
 
 function verboseAxiosInterceptor(functionName, verbose = false) {
