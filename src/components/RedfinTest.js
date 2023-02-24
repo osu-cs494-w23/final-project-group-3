@@ -1,5 +1,5 @@
 import React from "react";
-import useRedfinListingsApi from "../hooks/useRedfinApi";
+import {useRedfinListingsApi} from "../hooks/useRedfinApi";
 
 function RedfinTest(props) {
   const [{ data, loading, isError }] = useRedfinListingsApi({
