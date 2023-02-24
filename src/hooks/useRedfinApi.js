@@ -74,7 +74,7 @@ const useRedfinListingsApi = (initialParams, verbose = false) => {
     return () => {
       didCancel = true;
     }
-  }, [requestParams]);
+  }, [requestParams, verbose]);
 
   return [state, setRequestParams];
 }
@@ -117,7 +117,7 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
     return () => {
       didCancel = true;
     }
-  }, [requestParams]);
+  }, [requestParams, verbose]);
 
   return [state, setRequestParams];
 }

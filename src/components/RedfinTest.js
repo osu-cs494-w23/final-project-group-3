@@ -9,7 +9,7 @@ function RedfinTest(props) {
     status: '9',
     sf: '1,2,3,5,6,7',
     num_homes: '10',
-  });
+  }, false);
   return (
     <div>
       <p>Redfin Test</p>
