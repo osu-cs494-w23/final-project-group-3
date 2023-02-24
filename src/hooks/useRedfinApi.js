@@ -3,6 +3,15 @@
 import {useState, useEffect, useReducer} from "react";
 import axios from "axios";
 
+const axiosInstance = axios.create({
+  baseURL: 'https://unofficial-redfin.p.rapidapi.com',
+  headers: {
+    'X-RapidAPI-Host': 'unofficial-redfin.p.rapidapi.com',
+    'X-RapidAPI-Key': process.env.REACT_APP_REDFIN_KEY
+  }
+});
+
+
 const redfinListingsReducer = (state, action) => {
   switch (action.type) {
     case "FETCH_INIT":
@@ -46,14 +55,8 @@ const useRedfinListingsApi = (initialParams) => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await axios({
-          method: 'GET',
-          url: 'https://unofficial-redfin.p.rapidapi.com/properties/list',
-          params: requestParams,
-          headers: {
-            'X-RapidAPI-Host': 'unofficial-redfin.p.rapidapi.com',
-            'X-RapidAPI-Key': process.env.REACT_APP_REDFIN_KEY
-          }
+        const result = await axiosInstance.get('/properties/list', {
+          params: requestParams
         });
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
@@ -90,15 +93,9 @@ const useRedfinAutoCompleteApi = (initialLocation) => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await axios({
-          method: 'GET',
-          url: 'https://unofficial-redfin.p.rapidapi.com/auto-complete',
+        const result = await axiosInstance.get('/auto-complete', {
           params: {
             location: requestParams
-          },
-          headers: {
-            'X-RapidAPI-Host': 'unofficial-redfin.p.rapidapi.com',
-            'X-RapidAPI-Key': process.env.REACT_APP_REDFIN_KEY
           }
         });
         if (!didCancel) {
