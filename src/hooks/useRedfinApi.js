@@ -126,6 +126,7 @@ function verboseAxiosInterceptor(functionName, verbose = false) {
   const reqInterceptor = axiosInstance.interceptors.request.use(res => {
     if (verbose) {
       console.log(functionName + ': request header:', res.headers);
+      console.log(functionName + ': request data:', res.data);
     }
     return res;
   }, error => Promise.reject(error));
