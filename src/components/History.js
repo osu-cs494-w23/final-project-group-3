@@ -62,7 +62,8 @@ function History() {
                 console.log(searchParams.get("q"))
             }}>
                 {/* <input placeholder="Enter a region" onChange={(e) => setText(e.target.value)}/> */}
-                <input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/>
+                {/* <input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/> */}
+                <input placeholder="Enter a region" onChange={e => setInputQuery(e.target.value)}/>
                 {/* {console.log(text)} */}
                 <button type="submit">Search</button>
             </form>
