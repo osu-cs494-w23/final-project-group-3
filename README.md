@@ -11,6 +11,18 @@ REACT_APP_REDFIN_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 Confirm that the key works by running your app and navigating to the http://localhost:3000/redfin/test page.
 
+## Install dependencies
+
+To install the base package, run:
+```
+npm install
+```
+
+To install Papa Parse for the `useCSV` hook, run:
+```
+npm i papaparse
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
