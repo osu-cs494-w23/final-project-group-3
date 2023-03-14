@@ -15,7 +15,6 @@ function useCSV(csvFilePath) {
             skipEmptyLines: true,
             complete: function(results) {
                 console.log("in Papa.parse:", results)
-                // setCity(results)
                 setIsLoading(false)
                 setPrices(results)
             }
@@ -33,7 +32,6 @@ function History() {
     
     return (
         <>
-            {/* { console.log(city) } */}
             <h1>Testing. 1, 2, 3...</h1>
         </>
         
