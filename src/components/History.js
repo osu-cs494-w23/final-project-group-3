@@ -11,11 +11,22 @@ function Loading() {
 } 
 
 function Region(props) {
-    console.log(props.region)
+    const region = props.region
+    console.log(region)
+
+    const values = Object.values(region).map(field => <li>{field}</li>)
+    const prices = values.splice(5)
+    const keys = Object.keys(region).map(field => <li>{field}</li>)
+    const dates = keys.splice(5)
+
+    const date_price_pairs = dates.map((d, p) => [d, prices[p]])
 
     return (
         <>
-            <p>{props.region.RegionName}</p>
+            <p>{region.RegionName}</p>
+            <ul>
+                {date_price_pairs}
+            </ul>
         </>
 
     )
