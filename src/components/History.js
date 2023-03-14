@@ -32,6 +32,8 @@ function Region(props) {
     const prices = getPrices(region)
     const date_price_pairs = dates.map((d, p) => [<li key={d}>{d}</li>, <li key={p}>{prices[p]}</li>])
 
+    // console.log("date_price_pairs", date_price_pairs)
+
     return (
         <>
             <p>{region.RegionName}</p>
