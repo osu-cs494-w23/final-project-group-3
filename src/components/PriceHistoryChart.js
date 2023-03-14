@@ -6,6 +6,8 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
  
 function PriceHistoryChart(props) {
+    
+
     const options = {
         animationEnabled: true,
         theme: "light2",

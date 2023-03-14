@@ -12,14 +12,24 @@ function Loading() {
     return (
         <h1>Loading...</h1>
     )
-} 
+}
+
+function getDates(props) {
+    const region = props
+    const keys = Object.keys(region).map(field => field)
+    return keys.splice(5)
+}
+
+function getPrices(props) {
+    const region = props
+    const values = Object.values(region).map(field => Number(field).toFixed(2))
+    return values.splice(5)
+}
 
 function Region(props) {
     const region = props.region
-    const values = Object.values(region).map(field => <li key={field}>{Number(field).toFixed(2)}</li>)
-    const prices = values.splice(5)
-    const keys = Object.keys(region).map(field => <li key={field}>{field}</li>)
-    const dates = keys.splice(5)
+    const dates = getDates(region)
+    const prices = getPrices(region)
 
     const date_price_pairs = dates.map((d, p) => [d, prices[p]])
 
@@ -71,6 +81,8 @@ function History() {
                                     It reflects the typical value for homes in the 35th to 65th percentile range.
                                     Data rendered as smoothed, seasonally adjusted measure.
                                 </p>
+                                {console.log(getDates(region))}
+                                {console.log(getPrices(region))}
                                 <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
                             </div>
                         )
