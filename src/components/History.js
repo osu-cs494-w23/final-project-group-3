@@ -16,9 +16,7 @@ function Loading() {
 
 function Region(props) {
     const region = props.region
-    // console.log(region)
-
-    const values = Object.values(region).map(field => <li key={field}>{field}</li>)
+    const values = Object.values(region).map(field => <li key={field}>{Number(field).toFixed(2)}</li>)
     const prices = values.splice(5)
     const keys = Object.keys(region).map(field => <li key={field}>{field}</li>)
     const dates = keys.splice(5)
