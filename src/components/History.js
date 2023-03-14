@@ -64,7 +64,7 @@ function History() {
                     verifyInput(searchParams.get("q"), region.RegionName) && <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
                     ))
             }
-            <h1>Testing. 1, 2, 3...</h1>
+            <h1>Testing. This is the History Route</h1>
         </>
         
     )
