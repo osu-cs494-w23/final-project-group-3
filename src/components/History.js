@@ -61,10 +61,15 @@ function History() {
                 <button type="submit">Search</button>
             </form>
             {isLoading && <Loading />}
-            <PriceHistoryChart />
             {regions && searchParams.get("q")
                 && regions.map(region => (
-                    verifyInput(searchParams.get("q"), region.RegionName) && <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
+                    verifyInput(searchParams.get("q"), region.RegionName) && 
+                        (
+                            <div>
+                                <PriceHistoryChart name={region.RegionName}/>
+                                <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
+                            </div>
+                        )
                     ))
             }
             <h1>Testing. This is the History Route</h1>
