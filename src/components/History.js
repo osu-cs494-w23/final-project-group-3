@@ -63,7 +63,7 @@ function History() {
                 && regions.map(region => (
                     verifyInput(searchParams.get("q"), region.RegionName) && 
                         (
-                            <div>
+                            <div key={region.RegionName}>
                                 <PriceHistoryChart name={region.RegionName}/>
                                 <p>
                                     Zillow Home Value Index (ZHVI): A measure of the typical home value and 
