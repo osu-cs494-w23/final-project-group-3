@@ -10,10 +10,12 @@ function Loading() {
     )
 } 
 
-function City(props) {
+function Region(props) {
+    console.log(props.region)
+
     return (
         <>
-            <p>{props.name.RegionName}</p>
+            <p>{props.region.RegionName}</p>
         </>
 
     )
@@ -21,19 +23,17 @@ function City(props) {
 
 function History() {
     const { data, isLoading } = useCSV(csvFilePath)
-    const priceHistoryByCity = data.data
+    const regions = data.data
 
-    const cityName = 'New York, NY'
+    const targetRegion = 'New York, NY'
     // const cityName = 'Chicago, IL'
     
     return (
         <>
             {isLoading && <Loading />}
-            {priceHistoryByCity && console.log(priceHistoryByCity[1])}
-            {priceHistoryByCity 
-                // && priceHistoryByCity.map(city => <City key={city.RegionID} name={city} display={cityName} />)
-                && priceHistoryByCity.map(city => (
-                    city.RegionName === cityName && <City key={city.RegionID} name={city} display={cityName} />
+            {regions 
+                && regions.map(region => (
+                    region.RegionName === targetRegion && <Region key={region.RegionID} region={region} display={targetRegion} />
                     ))
             }
             <h1>Testing. 1, 2, 3...</h1>
