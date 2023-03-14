@@ -51,7 +51,7 @@ function History() {
             {isLoading && <Loading />}
             {regions 
                 && regions.map(region => (
-                    verifyInput(region.RegionName, targetRegion) && <Region key={region.RegionID} region={region} display={targetRegion} />
+                    verifyInput(targetRegion, region.RegionName) && <Region key={region.RegionID} region={region} display={targetRegion} />
                     ))
             }
             <h1>Testing. 1, 2, 3...</h1>
