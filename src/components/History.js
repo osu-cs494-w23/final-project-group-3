@@ -16,9 +16,9 @@ function Region(props) {
     const region = props.region
     // console.log(region)
 
-    const values = Object.values(region).map(field => <li>{field}</li>)
+    const values = Object.values(region).map(field => <li key={field}>{field}</li>)
     const prices = values.splice(5)
-    const keys = Object.keys(region).map(field => <li>{field}</li>)
+    const keys = Object.keys(region).map(field => <li key={field}>{field}</li>)
     const dates = keys.splice(5)
 
     const date_price_pairs = dates.map((d, p) => [d, prices[p]])
