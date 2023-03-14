@@ -31,7 +31,7 @@ function Region(props) {
     const dates = getDates(region)
     const prices = getPrices(region)
 
-    const date_price_pairs = dates.map((d, p) => [d, prices[p]])
+    const date_price_pairs = dates.map((d, p) => [<li>{d}</li>, <li>{prices[p]}</li>])
 
     return (
         <>
@@ -74,15 +74,13 @@ function History() {
                     verifyInput(searchParams.get("q"), region.RegionName) && 
                         (
                             <div key={region.RegionName}>
-                                <PriceHistoryChart name={region.RegionName}/>
+                                <PriceHistoryChart name={region.RegionName} xAxis={getDates(region)} yAxis={getPrices(region)} />
                                 <p>
                                     Zillow Home Value Index (ZHVI): A measure of the typical home value and 
                                     market changes across a given region for all housing types.
                                     It reflects the typical value for homes in the 35th to 65th percentile range.
                                     Data rendered as smoothed, seasonally adjusted measure.
                                 </p>
-                                {console.log(getDates(region))}
-                                {console.log(getPrices(region))}
                                 <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
                             </div>
                         )
