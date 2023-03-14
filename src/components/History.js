@@ -5,7 +5,7 @@ import { useState } from "react";
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
 
 function useCSV(csvFilePath) {
-    const [ prices, setPrices ] = useState([])
+    const [ data, setData ] = useState([])
     const [ isLoading, setIsLoading ] = useState(false)
     useEffect(() => {
         setIsLoading(true)
@@ -16,18 +16,18 @@ function useCSV(csvFilePath) {
             complete: function(results) {
                 console.log("in Papa.parse:", results)
                 setIsLoading(false)
-                setPrices(results)
+                setData(results)
             }
         })
     }, [])
     
-    return { prices, isLoading}
+    return { data, isLoading}
 }
 
 function History() {
-    const { prices, isLoading } = useCSV(csvFilePath)
+    const { data, isLoading } = useCSV(csvFilePath)
 
-    console.log("In History, prices:", prices)
+    console.log("In History, data:", data)
     console.log("In History, isLoading:", isLoading)
     
     return (
