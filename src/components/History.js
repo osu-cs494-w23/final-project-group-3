@@ -1,28 +1,8 @@
-import React, { useEffect } from "react"
-import Papa from 'papaparse'
-import { useState } from "react";
+import React from "react"
+
+import useCSV from "../hooks/useCSV";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
-
-function useCSV(csvFilePath) {
-    const [ data, setData ] = useState([])
-    const [ isLoading, setIsLoading ] = useState(false)
-
-    useEffect(() => {
-        setIsLoading(true)
-        Papa.parse(csvFilePath, {
-            header: true,
-            download: true,
-            skipEmptyLines: true,
-            complete: function(results) {
-                setIsLoading(false)
-                setData(results)
-            }
-        })
-    }, [])
-    
-    return { data, isLoading}
-}
 
 function Loading() {
     return (
@@ -44,6 +24,7 @@ function History() {
     const priceHistoryByCity = data.data
 
     const cityName = 'New York, NY'
+    // const cityName = 'Chicago, IL'
     
     return (
         <>
