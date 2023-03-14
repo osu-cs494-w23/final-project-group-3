@@ -4,6 +4,8 @@ import { useSearchParams } from 'react-router-dom'
 
 import useCSV from "../hooks/useCSV";
 
+import PriceHistoryChart from "./PriceHistoryChart";
+
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
 
 function Loading() {
@@ -59,6 +61,7 @@ function History() {
                 <button type="submit">Search</button>
             </form>
             {isLoading && <Loading />}
+            <PriceHistoryChart />
             {regions && searchParams.get("q")
                 && regions.map(region => (
                     verifyInput(searchParams.get("q"), region.RegionName) && <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
