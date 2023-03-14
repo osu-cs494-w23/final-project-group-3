@@ -62,13 +62,13 @@ function History() {
                 console.log(searchParams.get("q"))
             }}>
                 {/* <input placeholder="Enter a region" onChange={(e) => setText(e.target.value)}/> */}
-                {/* <input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/> */}
-                <input placeholder="Enter a region" onChange={e => setInputQuery(e.target.value)}/>
+                <input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/>
+                {/* <input placeholder="Enter a region" onChange={e => setInputQuery(e.target.value)}/> */}
                 {/* {console.log(text)} */}
                 <button type="submit">Search</button>
             </form>
             {isLoading && <Loading />}
-            {regions 
+            {regions && searchParams.get("q")
                 && regions.map(region => (
                     // verifyInput(targetRegion, region.RegionName) && <Region key={region.RegionID} region={region} display={targetRegion} />
                     verifyInput(searchParams.get("q"), region.RegionName) && <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
