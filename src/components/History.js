@@ -1,5 +1,5 @@
 import React from "react"
-
+import { useState } from "react";
 import useCSV from "../hooks/useCSV";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
@@ -12,7 +12,7 @@ function Loading() {
 
 function Region(props) {
     const region = props.region
-    console.log(region)
+    // console.log(region)
 
     const values = Object.values(region).map(field => <li>{field}</li>)
     const prices = values.splice(5)
@@ -40,14 +40,24 @@ function verifyInput(input, region) {
 }
 
 function History() {
+    const [ text, setText ] = useState("")
     const { data, isLoading } = useCSV(csvFilePath)
     const regions = data.data
 
-    const targetRegion = 'New York, NY'
+    // const targetRegion = 'New York, NY'
+    const targetRegion = 'New York'
     // const targetRegion = 'Chicago, IL'
     
     return (
         <>
+            <form onSubmit={e => {
+                e.preventDefault()
+                console.log(text)
+            }}>
+                <input placeholder="Enter a region" onChange={(e) => setText(e.target.value)}/>
+                {/* {console.log(text)} */}
+                <button type="submit">Search</button>
+            </form>
             {isLoading && <Loading />}
             {regions 
                 && regions.map(region => (
