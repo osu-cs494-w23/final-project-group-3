@@ -13,27 +13,27 @@ function PriceHistoryChart(props) {
             text: `ZHVI by month: ${props.name}`
         },
         axisX:{
-            valueFormatString: "DD MMM",
+            valueFormatString: "DD MMM YY",
             crosshair: {
                 enabled: true,
                 snapToDataPoint: true
             }
         },
         axisY: {
-            title: "Closing Price (in EUR)",
-            valueFormatString: "€##0.00",
+            title: "Home Value",
+            valueFormatString: "$##0.00",
             crosshair: {
                 enabled: true,
                 snapToDataPoint: true,
                 labelFormatter: function(e) {
-                    return "€" + CanvasJS.formatNumber(e.value, "##0.00");
+                    return "$" + CanvasJS.formatNumber(e.value, "##0.00");
                 }
             }
         },
         data: [{
             type: "area",
-            xValueFormatString: "DD MMM",
-            yValueFormatString: "€##0.00",
+            xValueFormatString: "DD MMM YY",
+            yValueFormatString: "$##0.00",
             dataPoints: [
                 { x: new Date("2018-03-01"), y: 85.3},
                 { x: new Date("2018-03-02"), y: 83.97},
