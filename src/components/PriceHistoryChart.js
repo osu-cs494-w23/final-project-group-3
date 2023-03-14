@@ -6,9 +6,7 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
  
 function PriceHistoryChart(props) {
-
     const dataPoints = props.xAxis.map( (x, y) =>  ({ x: new Date(x), y: Number(props.yAxis[y]) }) )
-    console.log(dataPoints)
 
     const options = {
         animationEnabled: true,
@@ -49,7 +47,7 @@ function PriceHistoryChart(props) {
         />
         {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
     </div>
-    );
+    )
 }
  
 export default PriceHistoryChart

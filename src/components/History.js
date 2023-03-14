@@ -32,8 +32,6 @@ function Region(props) {
     const prices = getPrices(region)
     const date_price_pairs = dates.map((d, p) => [<li key={d}>{d}</li>, <li key={p}>{prices[p]}</li>])
 
-    // console.log("date_price_pairs", date_price_pairs)
-
     return (
         <>
             <p>{region.RegionName}</p>
@@ -41,7 +39,6 @@ function Region(props) {
                 {date_price_pairs}
             </ul> 
         </>
-
     )
 }
 
@@ -55,7 +52,6 @@ function verifyInput(input, region) {
 function History() {
     const [ searchParams, setSearchParams ] = useSearchParams()
     const [ inputQuery, setInputQuery ] = useState(searchParams.get("q") || "")
-
     const { data, isLoading } = useCSV(csvFilePath)
     const regions = data.data
     
@@ -89,7 +85,6 @@ function History() {
             }
             <h1>Testing. This is the History Route</h1>
         </>
-        
     )
 }
 
