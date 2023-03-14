@@ -7,6 +7,7 @@ const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa
 function useCSV(csvFilePath) {
     const [ data, setData ] = useState([])
     const [ isLoading, setIsLoading ] = useState(false)
+
     useEffect(() => {
         setIsLoading(true)
         Papa.parse(csvFilePath, {
@@ -14,7 +15,6 @@ function useCSV(csvFilePath) {
             download: true,
             skipEmptyLines: true,
             complete: function(results) {
-                console.log("in Papa.parse:", results)
                 setIsLoading(false)
                 setData(results)
             }
@@ -24,14 +24,20 @@ function useCSV(csvFilePath) {
     return { data, isLoading}
 }
 
+function Loading() {
+    return (
+        <h1>Loading...</h1>
+    )
+} 
+
 function History() {
     const { data, isLoading } = useCSV(csvFilePath)
-
-    console.log("In History, data:", data)
-    console.log("In History, isLoading:", isLoading)
+    const priceHistoryByCity = data.data
     
     return (
         <>
+            {isLoading && <Loading />}
+            {priceHistoryByCity && console.log(priceHistoryByCity[1])}
             <h1>Testing. 1, 2, 3...</h1>
         </>
         
