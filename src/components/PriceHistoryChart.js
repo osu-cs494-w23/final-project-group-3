@@ -6,14 +6,11 @@ var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
  
 function PriceHistoryChart(props) {
-    {console.log(props.name)}
-
     const options = {
         animationEnabled: true,
         theme: "light2",
         title:{
-            text: "Stock Price of BMW - March 2018"
-            // text: {this.props.name}
+            text: `ZHVI by month: ${props.name}`
         },
         axisX:{
             valueFormatString: "DD MMM",
