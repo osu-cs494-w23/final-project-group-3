@@ -26,9 +26,16 @@ function Region(props) {
             <p>{region.RegionName}</p>
             <ul>
                 {date_price_pairs}
-            </ul>
+            </ul> 
         </>
 
+    )
+}
+
+function verifyInput(input, region) {
+    return (
+        region.toLowerCase().includes(input.toLowerCase()) ?
+        true : false
     )
 }
 
@@ -37,14 +44,14 @@ function History() {
     const regions = data.data
 
     const targetRegion = 'New York, NY'
-    // const cityName = 'Chicago, IL'
+    // const targetRegion = 'Chicago, IL'
     
     return (
         <>
             {isLoading && <Loading />}
             {regions 
                 && regions.map(region => (
-                    region.RegionName === targetRegion && <Region key={region.RegionID} region={region} display={targetRegion} />
+                    verifyInput(region.RegionName, targetRegion) && <Region key={region.RegionID} region={region} display={targetRegion} />
                     ))
             }
             <h1>Testing. 1, 2, 3...</h1>
