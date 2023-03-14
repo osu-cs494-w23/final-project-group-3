@@ -67,6 +67,12 @@ function History() {
                         (
                             <div>
                                 <PriceHistoryChart name={region.RegionName}/>
+                                <p>
+                                    Zillow Home Value Index (ZHVI): A measure of the typical home value and 
+                                    market changes across a given region and housing type.
+                                    It reflects the typical value for homes in the 35th to 65th percentile range.
+                                    Data rendered as smoothed, seasonally adjusted measure.
+                                </p>
                                 <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
                             </div>
                         )
