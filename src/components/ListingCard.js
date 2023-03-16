@@ -1,7 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
-import React from "react";
-import { css } from '@emotion/react'
 import styled from '@emotion/styled/macro'
 
 const ListingContainer = styled.div`
@@ -25,26 +21,6 @@ const ImageContainer = styled.div`
 `
 
 function ListingCard(props) {
-
-    // const styles = css`
-        // border: 1px solid dimgray;
-        // margin: 3px;
-        // padding: 5px;
-        // background-color: ghostwhite;
-        // img{
-        //     background-color: white;
-        //     border: 1px solid dimgray;
-        //     display: block;
-        //     margin-left: auto;
-        //     margin-right: auto;
-        //     margin-bottom: 5px;
-        //     max-width: 85px;
-        // }
-    //     p{
-    //         font-size: 11px;
-    //     }
-    // `
-
     return (
         <ListingContainer >
             <ImageContainer>
