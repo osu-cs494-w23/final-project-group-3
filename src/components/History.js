@@ -25,22 +25,6 @@ function getPrices(region) {
     return values.splice(5)
 }
 
-function Region(props) {
-    const region = props.region
-    const dates = getDates(region)
-    const prices = getPrices(region)
-    const date_price_pairs = dates.map((d, p) => [<li key={d}>{d}</li>, <li key={p}>{prices[p]}</li>])
-
-    return (
-        <>
-            <p>{region.RegionName}</p>
-            <ul>
-                {date_price_pairs}
-            </ul> 
-        </>
-    )
-}
-
 function verifyInput(input, region) {
     return (
         region.toLowerCase().includes(input.toLowerCase()) ?
