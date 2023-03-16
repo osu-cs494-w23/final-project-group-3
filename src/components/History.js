@@ -4,24 +4,31 @@ import { useSearchParams } from 'react-router-dom'
 
 import useCSV from "../hooks/useCSV";
 
+import PriceHistoryChart from "./PriceHistoryChart";
+
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
 
 function Loading() {
     return (
         <h1>Loading...</h1>
     )
-} 
+}
+
+function getDates(region) {
+    const keys = Object.keys(region).map(field => field)
+    return keys.splice(5)
+}
+
+function getPrices(region) {
+    const values = Object.values(region).map(field => Number(field).toFixed(2))
+    return values.splice(5)
+}
 
 function Region(props) {
     const region = props.region
-    // console.log(region)
-
-    const values = Object.values(region).map(field => <li key={field}>{field}</li>)
-    const prices = values.splice(5)
-    const keys = Object.keys(region).map(field => <li key={field}>{field}</li>)
-    const dates = keys.splice(5)
-
-    const date_price_pairs = dates.map((d, p) => [d, prices[p]])
+    const dates = getDates(region)
+    const prices = getPrices(region)
+    const date_price_pairs = dates.map((d, p) => [<li key={d}>{d}</li>, <li key={p}>{prices[p]}</li>])
 
     return (
         <>
@@ -30,7 +37,6 @@ function Region(props) {
                 {date_price_pairs}
             </ul> 
         </>
-
     )
 }
 
@@ -44,7 +50,6 @@ function verifyInput(input, region) {
 function History() {
     const [ searchParams, setSearchParams ] = useSearchParams()
     const [ inputQuery, setInputQuery ] = useState(searchParams.get("q") || "")
-
     const { data, isLoading } = useCSV(csvFilePath)
     const regions = data.data
     
@@ -61,12 +66,23 @@ function History() {
             {isLoading && <Loading />}
             {regions && searchParams.get("q")
                 && regions.map(region => (
-                    verifyInput(searchParams.get("q"), region.RegionName) && <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
+                    verifyInput(searchParams.get("q"), region.RegionName) && 
+                        (
+                            <div key={region.RegionName}>
+                                <PriceHistoryChart name={region.RegionName} xAxis={getDates(region)} yAxis={getPrices(region)} />
+                                <p>
+                                    Zillow Home Value Index (ZHVI): A measure of the typical home value and 
+                                    market changes across a given region for all housing types.
+                                    It reflects the typical value for homes in the 35th to 65th percentile range.
+                                    Data rendered as smoothed, seasonally adjusted measure.
+                                </p>
+                                <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
+                            </div>
+                        )
                     ))
             }
-            <h1>Testing. 1, 2, 3...</h1>
+            <h1>Testing. This is the History Route</h1>
         </>
-        
     )
 }
 
