@@ -6,14 +6,9 @@ import useCSV from "../hooks/useCSV";
 
 import PriceHistoryChart from "./PriceHistoryChart";
 import ListingCard from "./ListingCard";
+import Loading from "./Loading";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
-
-function Loading() {
-    return (
-        <h1>Loading...</h1>
-    )
-}
 
 function getDates(region) {
     const keys = Object.keys(region).map(field => field)
