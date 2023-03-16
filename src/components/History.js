@@ -57,7 +57,7 @@ function History() {
                                     Data rendered as smoothed, seasonally adjusted measure.
                                 </p>
                                 {/* <Region key={region.RegionID} region={region} display={searchParams.get("q")} /> */}
-                                <ListingCardList />
+                                <ListingCardList region={region.RegionName}/>
                             </div>
                         )
                     ))
