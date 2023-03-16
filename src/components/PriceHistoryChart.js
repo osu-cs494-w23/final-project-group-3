@@ -37,7 +37,8 @@ function PriceHistoryChart(props) {
             xValueFormatString: "DD MMM YY",
             yValueFormatString: "$##0.00",
             dataPoints: dataPoints
-        }]
+        }],
+        zoomEnabled: true
     }
     
     return (

@@ -14,14 +14,12 @@ function Loading() {
     )
 }
 
-function getDates(props) {
-    const region = props
+function getDates(region) {
     const keys = Object.keys(region).map(field => field)
     return keys.splice(5)
 }
 
-function getPrices(props) {
-    const region = props
+function getPrices(region) {
     const values = Object.values(region).map(field => Number(field).toFixed(2))
     return values.splice(5)
 }
