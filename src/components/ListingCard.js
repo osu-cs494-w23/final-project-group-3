@@ -20,7 +20,7 @@ const ImageContainer = styled.div`
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 5px;
-        max-width: 85px;
+        max-width: 100px;
     }
 `
 

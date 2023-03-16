@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import useCSV from "../hooks/useCSV";
 
 import PriceHistoryChart from "./PriceHistoryChart";
-import ListingCard from "./ListingCard";
+import ListingCardList from "./ListingCardList";
 import Loading from "./Loading";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
@@ -57,12 +57,7 @@ function History() {
                                     Data rendered as smoothed, seasonally adjusted measure.
                                 </p>
                                 {/* <Region key={region.RegionID} region={region} display={searchParams.get("q")} /> */}
-                                <ul>
-                                    <ListingCard />
-                                    <ListingCard />
-                                    <ListingCard />
-                                    <ListingCard />
-                                </ul>
+                                <ListingCardList />
                             </div>
                         )
                     ))
