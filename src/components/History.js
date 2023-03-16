@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import useCSV from "../hooks/useCSV";
 
 import PriceHistoryChart from "./PriceHistoryChart";
+import ListingCard from "./ListingCard";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
 
@@ -76,12 +77,17 @@ function History() {
                                     It reflects the typical value for homes in the 35th to 65th percentile range.
                                     Data rendered as smoothed, seasonally adjusted measure.
                                 </p>
-                                <Region key={region.RegionID} region={region} display={searchParams.get("q")} />
+                                {/* <Region key={region.RegionID} region={region} display={searchParams.get("q")} /> */}
+                                <ul>
+                                    <ListingCard />
+                                    <ListingCard />
+                                    <ListingCard />
+                                    <ListingCard />
+                                </ul>
                             </div>
                         )
                     ))
             }
-            <h1>Testing. This is the History Route</h1>
         </>
     )
 }
