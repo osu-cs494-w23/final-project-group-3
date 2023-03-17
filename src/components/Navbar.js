@@ -30,9 +30,9 @@ const NavbarContainer = styled.div`
 function Navbar() {
     return (
         <NavbarContainer>
-            <a>Home</a>
+            <a href="/">Home</a>
             <a>Search Listings</a>
-            <a>Market History</a>
+            <a href="/history">Market History</a>
             <a>Favorites</a>
         </NavbarContainer>
     )
