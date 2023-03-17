@@ -5,7 +5,7 @@ import ListingCard from './ListingCard'
 const ListingList = styled.ul`
     border: 1px solid dimgray;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding: 0;
 `
 

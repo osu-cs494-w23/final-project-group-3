@@ -1,15 +1,15 @@
 import styled from '@emotion/styled/macro'
 
 const ListingContainer = styled.span`
-    border: 1px solid red;
-    margin: 3px;
+    border: 1px solid dimgray;
+    margin: 5px;
     padding: 5px;
     background-color: ghostwhite;
     min-width: 190px;
 `
 
 const ImageContainer = styled.div`
-    border: 1px solid blue;
+    // border: 1px solid blue;
     img{
         background-color: white;
         border: 1px solid dimgray;
