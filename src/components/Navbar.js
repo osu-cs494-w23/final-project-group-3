@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from '@emotion/styled/macro'
 
 const NavbarContainer = styled.div`
@@ -11,7 +12,7 @@ const NavbarContainer = styled.div`
     padding-bottom: 0px;
     justify-content: space-evenly;
     a{
-        color: black;
+        color: Cornsilk;
         text-align: center;
         padding: 14px 20px;
         text-decoration: none;
@@ -19,21 +20,21 @@ const NavbarContainer = styled.div`
     }
     a:hover{
         background-color: DeepSkyBlue;
-        color: Cornsilk;
+        color: black;
     }
     a.active{
-        background-color: black;
-        color: #ddb122;
+        background-color: blue;
+        color: Cornsilk;
     }
 `
 
 function Navbar() {
     return (
         <NavbarContainer>
-            <a href="/">Home</a>
-            <a>Search Listings</a>
-            <a href="/history">Market History</a>
-            <a>Favorites</a>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/search">Search Listings</NavLink>
+            <NavLink to="/history">Market History</NavLink>
+            <NavLink to="/favorites">Favorites</NavLink>
         </NavbarContainer>
     )
 }
