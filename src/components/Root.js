@@ -2,10 +2,13 @@ import React from "react";
 import logo from "../logo.svg";
 import {Outlet} from "react-router";
 
+import Navbar from "./Navbar";
+
 function Root(props) {
 
   return (
       <div className="App">
+        <Navbar />
         <header className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <p>
