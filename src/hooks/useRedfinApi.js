@@ -210,15 +210,11 @@ async function getRedfinPropertyListingsFromLocation(location, searchFilters, ve
       ...listingQueryInfo['query_info'],
       ...searchFilters
     };
-    if (verbose) {
-      console.log('getRedfinPropertyListingsFromLocation: params:', params);
-    }
     const propertyListingsData = await getPropertyListingsData(params, verbose);
     listings.push({
       'region_info': listingQueryInfo['region_info'],
       'homes': propertyListingsData.data.homes,
     });
-    listings.push(await getPropertyListingsData(params, verbose));
   }
   if (verbose) {
     console.log('getRedfinPropertyListingsFromLocation: listings:', listings);
