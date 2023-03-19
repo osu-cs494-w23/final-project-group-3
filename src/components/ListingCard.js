@@ -24,8 +24,11 @@ const ImageContainer = styled.div`
 `
 const FavoriteButton = styled.button`
     padding: 0;
-    // border: none;
-    // background: none;
+    border: none;
+    background: none;
+    position: absolute;
+    z-index: 1;
+    padding: 5px;
 `
 
 const DataContainer = styled.div`
