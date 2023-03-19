@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro'
+import { useState } from 'react'
 
 import ListingCard from './ListingCard'
 
@@ -11,13 +12,37 @@ const ListingList = styled.ul`
 
 function ListingCardList(props) {
     const region = props.region ? props.region : "your area"
-    const favorites = []
+
+    const [ favoriteListings, setFavoriteListings ] = useState({})
+
+    function addFavoriteListing(listingId, regionId, type, uipt, status) {
+        let newFavoriteListings = {
+            ...favoriteListings,
+        }
+        newFavoriteListings[listingId] = {region_id: regionId, type: type, uipt: uipt, status: status}
+        setFavoriteListings(newFavoriteListings)
+    }
+
+    function removeFavoriteListing(listingId) {
+        // let newFavoriteListings = delete favoriteListings[listingId]
+        const newFavoriteListings = {
+            ...favoriteListings
+        }
+        delete newFavoriteListings[listingId]
+        setFavoriteListings(newFavoriteListings)
+    }
+
+    function getFavoriteListings() {
+        return favoriteListings
+    }
+
+    let id = 0
     const listings = [
-        <ListingCard favorites={favorites}/>,
-        <ListingCard favorites={favorites}/>,
-        <ListingCard favorites={favorites}/>,
-        <ListingCard favorites={favorites}/>,
-        <ListingCard favorites={favorites}/>
+        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>
     ]
 
     return (
@@ -26,7 +51,11 @@ function ListingCardList(props) {
             <ListingList>
                 {listings}
             </ListingList>
-            {console.log("favorites:", favorites)}
+            {/* {console.log("favorites:", favorites)} */}
+            {console.log("getFavoriteListings", getFavoriteListings())}
+            {/* {listings.map(listing => {
+                console.log("listing:", listing.props)
+            })} */}
         </>
     )
 }

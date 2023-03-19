@@ -1,5 +1,7 @@
 import styled from '@emotion/styled/macro'
 import { useState } from 'react'
+import React, { useCallback } from 'react'
+
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
@@ -36,15 +38,30 @@ const DataContainer = styled.div`
 `
 
 function ListingCard(props) {
-    const [favorite, setFavorite] = useState(false)
-    let buttonImage = favorite ? '❤️' : '🤍'
+    const id = props.id
+    const addFavoriteListing = props.createFavoriteListingsCallback
+    const removeFavoriteListing = props.removeFavoriteListing
 
-    // if (favorite) props.favorites.push()
+    const [favorite, setFavorite] = useState(false)
+
+    let buttonImage = favorite ? '❤️' : '🤍'
+    
+    function handleFavoriteChange() {
+        if (!favorite) {
+            addFavoriteListing(id, 'region_id', 'type', '1,2,3,4,7,8', '9')
+        }
+        else {
+            removeFavoriteListing(id)
+        }
+        setFavorite(!favorite)
+
+    }
 
     return (
         <ListingContainer >
             <ImageContainer>
-                <FavoriteButton onClick={() => setFavorite(!favorite)}>{buttonImage}</FavoriteButton>
+            {/* <FavoriteButton onClick={() => setFavorite(!favorite)}>{buttonImage}</FavoriteButton> */}
+            <FavoriteButton onClick={handleFavoriteChange}>{buttonImage}</FavoriteButton>
                 <img src="https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg" alt="example image for listing" />
             </ImageContainer>
             <DataContainer>
