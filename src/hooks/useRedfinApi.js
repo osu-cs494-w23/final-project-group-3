@@ -196,8 +196,8 @@ async function getRedfinPropertyListingsFromLocation(location, searchFilters, ve
         'url': place['url'],
         'subName': place['subName'],
         'countryCode': place['countryCode'],
-        'type': place['type'],
-        'id': place['id'],
+        'type': urlToRegionType(place['url']),
+        'id': place['id'].split('_')[1],
       }
       return { 'query_info': queryInfo, 'region_info': regionInfo}
 
