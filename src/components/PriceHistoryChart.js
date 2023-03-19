@@ -23,19 +23,19 @@ function PriceHistoryChart(props) {
         },
         axisY: {
             title: "Home Value",
-            valueFormatString: "$##0.00",
+            valueFormatString: "$#,#00.00",
             crosshair: {
                 enabled: true,
                 snapToDataPoint: true,
                 labelFormatter: function(e) {
-                    return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+                    return "$" + CanvasJS.formatNumber(e.value, "#,#00.00");
                 }
             }
         },
         data: [{
             type: "area",
             xValueFormatString: "DD MMM YY",
-            yValueFormatString: "$##0.00",
+            yValueFormatString: "$#,#00.00",
             dataPoints: dataPoints
         }],
         zoomEnabled: true
