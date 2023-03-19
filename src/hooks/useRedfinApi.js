@@ -132,7 +132,7 @@ async function getAutoCompleteApi(location, verbose = false) {
   return result;
 }
 
-const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, verbose = false) => {
+const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, verbose = false, maxRegions = 1) => {
   const [requestParams, setRequestParams] = useState(initialParams);
   const [state, dispatch] = useReducer(redfinListingsReducer, {
     isLoading: false,
@@ -145,8 +145,7 @@ const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, 
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await getRedfinPropertyListingsFromLocation(requestParams, searchFilters, verbose);
-        console.log('result', result);
+        const result = await getRedfinPropertyListingsFromLocation(requestParams, searchFilters, verbose, maxRegions);
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result });
         }
@@ -164,7 +163,6 @@ const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, 
 
   return [state, setRequestParams];
 }
-
 /**
  * Retrieves property details within a provided location.
  *
@@ -175,29 +173,31 @@ const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, 
  * @param location - a zip code, city, etc...
  * @param searchFilters - check the documentation for the list of available filters: https://rapidapi.com/apidojo/api/unofficial-redfin
  * @param verbose - if true, will log the request and response headers and data
+ * @param maxSubRegions - the maximum number of subregions to search within the provided location. If the location is 'Eugene OR', then the subregions would be 'Downtown Eugene', 'Eugene', 'North Eugene', etc...
  */
-async function getRedfinPropertyListingsFromLocation(location, searchFilters, verbose = false) {
+async function getRedfinPropertyListingsFromLocation(location, searchFilters, verbose = false, maxSubRegions = 1) {
   const autoComplete = (await getAutoCompleteApi(location, verbose))['data'];
   // This will return an array of places (each containing the data we want) that match the location parameter, e.g. 'Downtown Eugene', 'Eugene', 'North Eugene'
   const places = autoComplete['payload'];
   const sections = places['sections'];
   const placesSections = sections.filter((section) => section['name'] === 'Places');
-  const rows = placesSections[0]['rows'];
+  const rows = placesSections[0]['rows']; //.slice(0, maxSubRegions);
   const listingsQueryInfo = rows.map((place) => {
     return {
+      // The required parameters to search a property listing. Override them with the searchFilters parameter at your own risk.
       'region_id': place['id'].split('_')[1],
       'region_type': place['type'],
-      'uipt': '1,2,3,4,7,8', // Comma separated string of property types.
+      'uipt': '1,2,3,4,7,8',
       'status': '9',
-      'sf': '1,2,3,5,6,7'
     }
   });
   const listings = [];
   for (const queryInfo of listingsQueryInfo) {
     const params = {
-      'num_homes': '20',
-      ...searchFilters,
-      ...queryInfo
+      'num_homes': '1', // the number of homes will be multiplied by the number of places returned by the autocomplete api. Increase this value from searchFilters if you want more results.
+      'sf': '1,2,3,5,6,7', // MLS listings included
+      ...queryInfo,
+      ...searchFilters
     };
     console.log('params', params);
     listings.push(await getPropertyListingsData(params, verbose));

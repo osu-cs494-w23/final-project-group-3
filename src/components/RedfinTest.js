@@ -1,57 +1,30 @@
 import React from "react";
-import {useRedfinApiPropertyListingsFromLocation} from "../hooks/useRedfinApi";
+import {
+  useRedfinApiPropertyListingsFromLocation,
+} from "../hooks/useRedfinApi";
+
+const preCodeStyle = {
+  textAlign: 'left',
+  padding: '2rem',
+  // backgroundColor:'black',
+  fontSize: '12px',
+  fontFamily: 'sans-serif'
+}
 
 function RedfinTest(props) {
-  /*
-  const [listings] = useRedfinListingsApi({
-    region_id: '30749',
-    region_type: '6',
-    uipt: '1,2,3,4,7,8',
-    status: '9',
-    sf: '1,2,3,5,6,7',
-    num_homes: '10',
-  }, true);
-*/
-
-  const preCodeStyle = {
-    textAlign: 'left',
-    padding: '2rem',
-    // backgroundColor:'black',
-    fontSize: '12px',
-    fontFamily: 'sans-serif'
+  const regionName = 'san francisco';
+  //const locationName = 'sf';
+  // const locationName = '97402';
+  const searchFilters = {
+    'min_price': '75000',
+    'num_homes': '1',
   }
 
-  ///const [autoComplete] = useRedfinAutoCompleteApi('san francisco', true);
-  const [listingsFromLocation] = useRedfinApiPropertyListingsFromLocation('san francisco', {}, true);
+  const [listingsFromLocation] = useRedfinApiPropertyListingsFromLocation(regionName,  searchFilters, true, 1);
   return (
     <div style={{overflowY: 'auto', height: '100%', width:'100%', flexWrap: 'wrap'}}>
       <p>Redfin Test</p>
-      {/*
-      <h1>AutoComplete endpoint</h1>
-      <div style={{wordWrap:'break-word'}}>
-        {autoComplete.isLoading && !autoComplete.isError ? ( <p>Loading...</p> ) : (
-            <pre style={preCodeStyle}>
-              {JSON.stringify(autoComplete.data,null,2.5)}
-            </pre>)}
-        {autoComplete.isError && <p>Something went wrong ...</p>}
-      </div>
-
-      <br></br>
-
-      (
-      <h1>Listings endpoint</h1>
-      <div style={{padding:'1rem', wordWrap:'break-word'}}>
-        {listings.isLoading && !listings.isError ? (<p>Loading...</p>) : (
-            <pre style={preCodeStyle}>
-              {JSON.stringify(listings.data,null,2.5)}
-            </pre>)}
-        {listings.isError && <p>Something went wrong ...</p>}
-      </div>
-      <br></br>
-      */}
-
-      <h1>Property from location endpoint</h1>
-      <h1>Default location is San Francisco</h1>
+      <h2>Getting property listings from a region</h2>
       <div style={{padding:'1rem', wordWrap:'break-word'}}>
         {listingsFromLocation.isLoading && !listingsFromLocation.isError ? (<p>Loading...</p>) : (
             <pre style={preCodeStyle}>
