@@ -23,11 +23,6 @@ To install Papa Parse for the `useCSV` hook, run:
 npm i papaparse
 ```
 
-To install the emotion styling library, run:
-```
-npm install @emotion/styled
-```
-
 ## Available Scripts
 
 In the project directory, you can run:
