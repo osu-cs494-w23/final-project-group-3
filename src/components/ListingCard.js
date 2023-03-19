@@ -24,8 +24,8 @@ const ImageContainer = styled.div`
 `
 const FavoriteButton = styled.button`
     padding: 0;
-    border: none;
-    background: none;
+    // border: none;
+    // background: none;
 `
 
 const DataContainer = styled.div`
@@ -38,7 +38,8 @@ function ListingCard(props) {
     return (
         <ListingContainer >
             <ImageContainer>
-                <FavoriteButton>🤍</FavoriteButton>
+                <FavoriteButton onClick={() => setFavorite(!favorite)}>🤍</FavoriteButton>
+                {console.log(favorite)}
                 <img src="https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg" alt="example image for listing" />
             </ImageContainer>
             <DataContainer>
