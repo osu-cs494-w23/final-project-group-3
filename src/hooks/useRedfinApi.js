@@ -122,6 +122,21 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
   return [state, setLocationParam];
 }
 
+/**
+ * Retrieves property details within a provided location.
+ *
+ * Example: I want to search for properties in Eugene OR with 3 beds, 2 baths, and a price range of 300k to 500k:
+ * * useRedfinPropertyDetailsApi('97401', {min_beds: 3, min_baths: 2, min_price: 300000, max_price: 500000}, false)
+ * * useRedfinPropertyDetailsApi('Eugene OR', {min_beds: 3, min_baths: 2, min_price: 300000, max_price: 500000}, false)
+ *
+ * @param location - a zip code, city, etc...
+ * @param searchFilters - check the documentation for the list of available filters: https://rapidapi.com/apidojo/api/unofficial-redfin
+ * @param verbose - if true, will log the request and response headers and data
+ */
+const useRedfinPropertyListingsApi = (location, searchFilters, verbose = false) => {
+
+}
+
 function verboseAxiosInterceptor(functionName, verbose = false) {
   const reqInterceptor = axiosInstance.interceptors.request.use(res => {
     if (verbose) {
