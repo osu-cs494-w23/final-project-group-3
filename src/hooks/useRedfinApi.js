@@ -227,10 +227,6 @@ async function getRedfinPropertyListingsFromLocation(location, searchFilters, ve
 }
 
 function urlToRegionType(url) {
-  /*
-  One of the following : -1:Unknowns|1:Neighborhood|2:Zip Code|4:State|5:County|6:City|7:School|8:School District|9:Service Region|10:Minor Civil Division|11:Country|30:CA Postal Code|31:CA Province|32:CA Provincial Division|33:CA Municipality|34:CA Forward Sortation Area
-  You need to use regex to examine the value of url field returned in …/auto-complete for suitable value. Ex : '/city/30749/…', it is city so it is 6 in this case.
-  */
   const regex = /\/(\w+)\/\d+\//;
   const match = regex.exec(url);
   if (match) {
