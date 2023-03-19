@@ -101,7 +101,7 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await useAutoCompleteApi(locationParam, verbose);
+        const result = await getAutoCompleteApi(locationParam, verbose);
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
         }
@@ -120,7 +120,7 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
   return [state, setLocationParam];
 }
 
-async function useAutoCompleteApi(location, verbose = false) {
+async function getAutoCompleteApi(location, verbose = false) {
   const [reqInterceptor, responseInterceptor] = verboseAxiosInterceptor('useAutoCompleteApi', verbose);
   const result = await axiosInstance.get('/auto-complete', {
     params: {
@@ -130,6 +130,38 @@ async function useAutoCompleteApi(location, verbose = false) {
   axiosInstance.interceptors.request.eject(reqInterceptor);
   axiosInstance.interceptors.response.eject(responseInterceptor);
   return result.data;
+}
+
+const useRedfinApiPropertyListingsFromLocation = (initialParams, verbose = false) => {
+  const [requestParams, setRequestParams] = useState(initialParams);
+  const [state, dispatch] = useReducer(redfinListingsReducer, {
+    isLoading: false,
+    isError: false,
+    data: [],
+  });
+
+  useEffect(() => {
+    let didCancel = false;
+    const fetchData = async () => {
+      dispatch({ type: "FETCH_INIT" });
+      try {
+        const result = await getRedfinPropertyListingsFromLocation(requestParams, verbose);
+        if (!didCancel) {
+          dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        }
+      } catch (error) {
+        if (!didCancel) {
+          dispatch({ type: "FETCH_FAILURE" });
+        }
+      }
+    };
+    fetchData();
+    return () => {
+      didCancel = true;
+    }
+  }, [requestParams, verbose]);
+
+  return [state, setRequestParams];
 }
 
 /**
@@ -143,8 +175,8 @@ async function useAutoCompleteApi(location, verbose = false) {
  * @param searchFilters - check the documentation for the list of available filters: https://rapidapi.com/apidojo/api/unofficial-redfin
  * @param verbose - if true, will log the request and response headers and data
  */
-const useRedfinPropertyListingsApi = async (location, searchFilters, verbose = false) => {
-  const [autoComplete] = createDeepDictionary(await useAutoCompleteApi(location, verbose));
+const getRedfinPropertyListingsFromLocation = async (location, searchFilters, verbose = false) => {
+  const [autoComplete] = createDeepDictionary(await getAutoCompleteApi(location, verbose));
   // This will return an array of places (each containing the data we want) that match the location parameter, e.g. 'Downtown Eugene', 'Eugene', 'North Eugene'
   const places = autoComplete['payload']['sections'].filter((section) => section['name'] === 'Places')['rows'];
   const listingsQueryInfo = places.map((place) => {
