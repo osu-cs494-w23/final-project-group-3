@@ -55,12 +55,7 @@ const useRedfinListingsApi = (initialParams, verbose = false) => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const [reqInterceptor, responseInterceptor] = verboseAxiosInterceptor('useRedfinListingsApi', verbose);
-        const result = await axiosInstance.get('/properties/list', {
-          params: requestParams
-        });
-        axiosInstance.interceptors.request.eject(reqInterceptor);
-        axiosInstance.interceptors.response.eject(responseInterceptor);
+        const result = await getPropertyListingsData(requestParams, verbose);
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
         }
@@ -77,6 +72,16 @@ const useRedfinListingsApi = (initialParams, verbose = false) => {
   }, [requestParams, verbose]);
 
   return [state, setRequestParams];
+}
+
+async function getPropertyListingsData(params, verbose = false) {
+  const [reqInterceptor, responseInterceptor] = verboseAxiosInterceptor('getPropertyListingsData', verbose);
+  const result = await axiosInstance.get('/properties/list', {
+    params: params
+  });
+  axiosInstance.interceptors.request.eject(reqInterceptor);
+  axiosInstance.interceptors.response.eject(responseInterceptor);
+  return result.data;
 }
 
 /*
@@ -139,8 +144,45 @@ async function useAutoCompleteApi(location, verbose = false) {
  * @param verbose - if true, will log the request and response headers and data
  */
 const useRedfinPropertyListingsApi = async (location, searchFilters, verbose = false) => {
-  const [autoComplete] = await useAutoCompleteApi(location, verbose);
-  //const [places] =
+  const [autoComplete] = createDeepDictionary(await useAutoCompleteApi(location, verbose));
+  // This will return an array of places (each containing the data we want) that match the location parameter, e.g. 'Downtown Eugene', 'Eugene', 'North Eugene'
+  const places = autoComplete['payload']['sections'].filter((section) => section['name'] === 'Places')['rows'];
+  const listingsQueryInfo = places.map((place) => {
+    return {
+      'region_id': place['id'],
+      'region_type': place['type'],
+      'uipt': '1,2,3,4,7,8', // Comma separated string of property types.
+      'status': '9'
+    }
+  });
+  const listings = [];
+  for (const queryInfo of listingsQueryInfo) {
+    const params = {
+      'num_homes': '20',
+      ...queryInfo,
+      ...searchFilters
+    };
+    listings.push(await getPropertyListingsData(params, verbose));
+  }
+  return listings;
+}
+
+function createDeepDictionary(obj) {
+  const result = [];
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      if (typeof value === 'object') {
+        const deepResult = createDeepDictionary(value);
+        deepResult.forEach((deepValue) => {
+          result.push([key, deepValue].join('.'));
+        });
+      } else {
+        result.push([key, value].join('.'));
+      }
+    }
+  }
+  return result;
 }
 
 function verboseAxiosInterceptor(functionName, verbose = false) {
