@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro'
+import { useState } from 'react'
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
@@ -18,7 +19,13 @@ const ImageContainer = styled.div`
         margin-right: auto;
         margin-bottom: 5px;
         max-width: 190px;
+        position: relative;
     }
+`
+const FavoriteButton = styled.button`
+    padding: 0;
+    border: none;
+    background: none;
 `
 
 const DataContainer = styled.div`
@@ -26,9 +33,12 @@ const DataContainer = styled.div`
 `
 
 function ListingCard(props) {
+    const [favorite, setFavorite] = useState(false)
+
     return (
         <ListingContainer >
             <ImageContainer>
+                <FavoriteButton>🤍</FavoriteButton>
                 <img src="https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg" alt="example image for listing" />
             </ImageContainer>
             <DataContainer>
