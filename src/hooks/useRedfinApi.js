@@ -181,7 +181,7 @@ async function getRedfinPropertyListingsFromLocation(location, searchFilters, ve
   const places = autoComplete['payload'];
   const sections = places['sections'];
   const placesSections = sections.filter((section) => section['name'] === 'Places');
-  const rows = placesSections[0]['rows']; //.slice(0, maxSubRegions);
+  const rows = placesSections[0]['rows'].slice(0, maxSubRegions);
   const listingsQueryInfo = rows.map((place) => {
     return {
       // The required parameters to search a property listing. Override them with the searchFilters parameter at your own risk.
