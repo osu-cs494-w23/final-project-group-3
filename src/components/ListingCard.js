@@ -37,11 +37,12 @@ const DataContainer = styled.div`
 
 function ListingCard(props) {
     const [favorite, setFavorite] = useState(false)
+    let buttonImage = favorite ? '❤️' : '🤍'
 
     return (
         <ListingContainer >
             <ImageContainer>
-                <FavoriteButton onClick={() => setFavorite(!favorite)}>🤍</FavoriteButton>
+                <FavoriteButton onClick={() => setFavorite(!favorite)}>{buttonImage}</FavoriteButton>
                 {console.log(favorite)}
                 <img src="https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg" alt="example image for listing" />
             </ImageContainer>
