@@ -81,7 +81,7 @@ async function getPropertyListingsData(params, verbose = false) {
   });
   axiosInstance.interceptors.request.eject(reqInterceptor);
   axiosInstance.interceptors.response.eject(responseInterceptor);
-  return result.data;
+  return result;
 }
 
 /*
@@ -129,10 +129,10 @@ async function getAutoCompleteApi(location, verbose = false) {
   });
   axiosInstance.interceptors.request.eject(reqInterceptor);
   axiosInstance.interceptors.response.eject(responseInterceptor);
-  return result.data;
+  return result;
 }
 
-const useRedfinApiPropertyListingsFromLocation = (initialParams, verbose = false) => {
+const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, verbose = false) => {
   const [requestParams, setRequestParams] = useState(initialParams);
   const [state, dispatch] = useReducer(redfinListingsReducer, {
     isLoading: false,
@@ -145,9 +145,10 @@ const useRedfinApiPropertyListingsFromLocation = (initialParams, verbose = false
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await getRedfinPropertyListingsFromLocation(requestParams, verbose);
+        const result = await getRedfinPropertyListingsFromLocation(requestParams, searchFilters, verbose);
+        console.log('result', result);
         if (!didCancel) {
-          dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+          dispatch({ type: "FETCH_SUCCESS", payload: result });
         }
       } catch (error) {
         if (!didCancel) {
@@ -168,53 +169,40 @@ const useRedfinApiPropertyListingsFromLocation = (initialParams, verbose = false
  * Retrieves property details within a provided location.
  *
  * Example: I want to search for properties in Eugene OR with 3 beds, 2 baths, and a price range of 300k to 500k:
- * * useRedfinPropertyDetailsApi('97401', {min_beds: 3, min_baths: 2, min_price: 300000, max_price: 500000}, false)
- * * useRedfinPropertyDetailsApi('Eugene OR', {min_beds: 3, min_baths: 2, min_price: 300000, max_price: 500000}, false)
+ * * useRedfinPropertyDetailsApi('97401', {min_beds: 3, min_baths: 2, min_price: 300000, max_price: 500000})
+ * * useRedfinPropertyDetailsApi('Eugene OR', {min_beds: 3, min_baths: 2, min_price: 300000, max_price: 500000})
  *
  * @param location - a zip code, city, etc...
  * @param searchFilters - check the documentation for the list of available filters: https://rapidapi.com/apidojo/api/unofficial-redfin
  * @param verbose - if true, will log the request and response headers and data
  */
-const getRedfinPropertyListingsFromLocation = async (location, searchFilters, verbose = false) => {
-  const [autoComplete] = createDeepDictionary(await getAutoCompleteApi(location, verbose));
+async function getRedfinPropertyListingsFromLocation(location, searchFilters, verbose = false) {
+  const autoComplete = (await getAutoCompleteApi(location, verbose))['data'];
   // This will return an array of places (each containing the data we want) that match the location parameter, e.g. 'Downtown Eugene', 'Eugene', 'North Eugene'
-  const places = autoComplete['payload']['sections'].filter((section) => section['name'] === 'Places')['rows'];
-  const listingsQueryInfo = places.map((place) => {
+  const places = autoComplete['payload'];
+  const sections = places['sections'];
+  const placesSections = sections.filter((section) => section['name'] === 'Places');
+  const rows = placesSections[0]['rows'];
+  const listingsQueryInfo = rows.map((place) => {
     return {
-      'region_id': place['id'],
+      'region_id': place['id'].split('_')[1],
       'region_type': place['type'],
       'uipt': '1,2,3,4,7,8', // Comma separated string of property types.
-      'status': '9'
+      'status': '9',
+      'sf': '1,2,3,5,6,7'
     }
   });
   const listings = [];
   for (const queryInfo of listingsQueryInfo) {
     const params = {
       'num_homes': '20',
-      ...queryInfo,
-      ...searchFilters
+      ...searchFilters,
+      ...queryInfo
     };
+    console.log('params', params);
     listings.push(await getPropertyListingsData(params, verbose));
   }
   return listings;
-}
-
-function createDeepDictionary(obj) {
-  const result = [];
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      const value = obj[key];
-      if (typeof value === 'object') {
-        const deepResult = createDeepDictionary(value);
-        deepResult.forEach((deepValue) => {
-          result.push([key, deepValue].join('.'));
-        });
-      } else {
-        result.push([key, value].join('.'));
-      }
-    }
-  }
-  return result;
 }
 
 function verboseAxiosInterceptor(functionName, verbose = false) {
@@ -235,4 +223,4 @@ function verboseAxiosInterceptor(functionName, verbose = false) {
   return [reqInterceptor, responseInterceptor];
 }
 
-export {useRedfinListingsApi, useRedfinAutoCompleteApi};
+export {useRedfinListingsApi, useRedfinAutoCompleteApi, useRedfinApiPropertyListingsFromLocation};

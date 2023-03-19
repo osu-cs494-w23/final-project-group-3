@@ -1,7 +1,8 @@
 import React from "react";
-import {useRedfinListingsApi, useRedfinAutoCompleteApi} from "../hooks/useRedfinApi";
+import {useRedfinApiPropertyListingsFromLocation} from "../hooks/useRedfinApi";
 
 function RedfinTest(props) {
+  /*
   const [listings] = useRedfinListingsApi({
     region_id: '30749',
     region_type: '6',
@@ -9,7 +10,8 @@ function RedfinTest(props) {
     status: '9',
     sf: '1,2,3,5,6,7',
     num_homes: '10',
-  }, false);
+  }, true);
+*/
 
   const preCodeStyle = {
     textAlign: 'left',
@@ -19,10 +21,12 @@ function RedfinTest(props) {
     fontFamily: 'sans-serif'
   }
 
-  const [autoComplete] = useRedfinAutoCompleteApi('san francisco', false);
+  ///const [autoComplete] = useRedfinAutoCompleteApi('san francisco', true);
+  const [listingsFromLocation] = useRedfinApiPropertyListingsFromLocation('san francisco', {}, true);
   return (
     <div style={{overflowY: 'auto', height: '100%', width:'100%', flexWrap: 'wrap'}}>
       <p>Redfin Test</p>
+      {/*
       <h1>AutoComplete endpoint</h1>
       <div style={{wordWrap:'break-word'}}>
         {autoComplete.isLoading && !autoComplete.isError ? ( <p>Loading...</p> ) : (
@@ -31,7 +35,10 @@ function RedfinTest(props) {
             </pre>)}
         {autoComplete.isError && <p>Something went wrong ...</p>}
       </div>
+
       <br></br>
+
+      (
       <h1>Listings endpoint</h1>
       <div style={{padding:'1rem', wordWrap:'break-word'}}>
         {listings.isLoading && !listings.isError ? (<p>Loading...</p>) : (
@@ -39,6 +46,18 @@ function RedfinTest(props) {
               {JSON.stringify(listings.data,null,2.5)}
             </pre>)}
         {listings.isError && <p>Something went wrong ...</p>}
+      </div>
+      <br></br>
+      */}
+
+      <h1>Property from location endpoint</h1>
+      <h1>Default location is San Francisco</h1>
+      <div style={{padding:'1rem', wordWrap:'break-word'}}>
+        {listingsFromLocation.isLoading && !listingsFromLocation.isError ? (<p>Loading...</p>) : (
+            <pre style={preCodeStyle}>
+              {JSON.stringify(listingsFromLocation.data,null,2.5)}
+            </pre>)}
+        {listingsFromLocation.isError && <p>Something went wrong ...</p>}
       </div>
     </div>
   );
