@@ -96,14 +96,7 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const [reqInterceptor, responseInterceptor] = verboseAxiosInterceptor('useRedfinAutoCompleteApi', verbose);
-        const result = await axiosInstance.get('/auto-complete', {
-          params: {
-            location: locationParam
-          }
-        });
-        axiosInstance.interceptors.request.eject(reqInterceptor);
-        axiosInstance.interceptors.response.eject(responseInterceptor);
+        const result = await useAutoCompleteApi(locationParam, verbose);
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
         }
@@ -122,6 +115,18 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
   return [state, setLocationParam];
 }
 
+async function useAutoCompleteApi(location, verbose = false) {
+  const [reqInterceptor, responseInterceptor] = verboseAxiosInterceptor('useAutoCompleteApi', verbose);
+  const result = await axiosInstance.get('/auto-complete', {
+    params: {
+      location: location
+    }
+  });
+  axiosInstance.interceptors.request.eject(reqInterceptor);
+  axiosInstance.interceptors.response.eject(responseInterceptor);
+  return result.data;
+}
+
 /**
  * Retrieves property details within a provided location.
  *
@@ -133,8 +138,9 @@ const useRedfinAutoCompleteApi = (initialLocation, verbose = false) => {
  * @param searchFilters - check the documentation for the list of available filters: https://rapidapi.com/apidojo/api/unofficial-redfin
  * @param verbose - if true, will log the request and response headers and data
  */
-const useRedfinPropertyListingsApi = (location, searchFilters, verbose = false) => {
-
+const useRedfinPropertyListingsApi = async (location, searchFilters, verbose = false) => {
+  const [autoComplete] = await useAutoCompleteApi(location, verbose);
+  //const [places] =
 }
 
 function verboseAxiosInterceptor(functionName, verbose = false) {
