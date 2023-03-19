@@ -11,17 +11,22 @@ const ListingList = styled.ul`
 
 function ListingCardList(props) {
     const region = props.region ? props.region : "your area"
+    const favorites = []
+    const listings = [
+        <ListingCard favorites={favorites}/>,
+        <ListingCard favorites={favorites}/>,
+        <ListingCard favorites={favorites}/>,
+        <ListingCard favorites={favorites}/>,
+        <ListingCard favorites={favorites}/>
+    ]
 
     return (
         <>
             <h1>Recomended listings in {region}</h1>
             <ListingList>
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
-                <ListingCard />
+                {listings}
             </ListingList>
+            {console.log("favorites:", favorites)}
         </>
     )
 }
