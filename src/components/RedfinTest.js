@@ -14,7 +14,7 @@ function RedfinTest(props) {
   const preCodeStyle = {
     textAlign: 'left',
     padding: '2rem',
-    backgroundColor:'black',
+    // backgroundColor:'black',
     fontSize: '12px',
     fontFamily: 'sans-serif'
   }
