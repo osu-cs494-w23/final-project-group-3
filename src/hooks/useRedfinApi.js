@@ -134,6 +134,7 @@ async function getAutoCompleteApi(location, verbose = false) {
 
 const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, verbose = false, maxRegions = 1) => {
   const [requestParams, setRequestParams] = useState(initialParams);
+  const [requestFilters, setRequestFilters] = useState(searchFilters);
   const [state, dispatch] = useReducer(redfinListingsReducer, {
     isLoading: false,
     isError: false,
@@ -145,7 +146,7 @@ const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, 
     const fetchData = async () => {
       dispatch({ type: "FETCH_INIT" });
       try {
-        const result = await getRedfinPropertyListingsFromLocation(requestParams, searchFilters, verbose, maxRegions);
+        const result = await getRedfinPropertyListingsFromLocation(requestParams, requestFilters, verbose, maxRegions);
         if (!didCancel) {
           dispatch({ type: "FETCH_SUCCESS", payload: result });
         }
@@ -159,7 +160,7 @@ const useRedfinApiPropertyListingsFromLocation = (initialParams, searchFilters, 
     return () => {
       didCancel = true;
     }
-  }, [requestParams, verbose]);
+  }, [requestParams, requestFilters, verbose, maxRegions]);
 
   return [state, setRequestParams];
 }
@@ -199,7 +200,9 @@ async function getRedfinPropertyListingsFromLocation(location, searchFilters, ve
       ...queryInfo,
       ...searchFilters
     };
-    console.log('params', params);
+    if (verbose) {
+      console.log('getRedfinPropertyListingsFromLocation: params:', params);
+    }
     listings.push(await getPropertyListingsData(params, verbose));
   }
   return listings;

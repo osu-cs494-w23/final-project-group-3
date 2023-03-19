@@ -20,7 +20,7 @@ function RedfinTest(props) {
     'num_homes': '1',
   }
 
-  const [listingsFromLocation] = useRedfinApiPropertyListingsFromLocation(regionName,  searchFilters, true, 1);
+  const [listingsFromLocation] = useRedfinApiPropertyListingsFromLocation(regionName,  searchFilters, false, 1);
   return (
     <div style={{overflowY: 'auto', height: '100%', width:'100%', flexWrap: 'wrap'}}>
       <p>Redfin Test</p>
