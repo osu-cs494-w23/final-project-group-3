@@ -184,28 +184,92 @@ async function getRedfinPropertyListingsFromLocation(location, searchFilters, ve
   const placesSections = sections.filter((section) => section['name'] === 'Places');
   const rows = placesSections[0]['rows'].slice(0, maxSubRegions);
   const listingsQueryInfo = rows.map((place) => {
-    return {
-      // The required parameters to search a property listing. Override them with the searchFilters parameter at your own risk.
-      'region_id': place['id'].split('_')[1],
-      'region_type': place['type'],
-      'uipt': '1,2,3,4,7,8',
-      'status': '9',
-    }
+      const queryInfo = {
+        // The required parameters to search a property listing. Override them with the searchFilters parameter at your own risk.
+        'region_id': place['id'].split('_')[1],
+        'region_type': urlToRegionType(place['url']),
+        'uipt': '1,2,3,4,7,8',
+        'status': '9',
+      }
+      const regionInfo = {
+        'name': place['name'],
+        'url': place['url'],
+        'subName': place['subName'],
+        'countryCode': place['countryCode'],
+        'type': place['type'],
+        'id': place['id'],
+      }
+      return { 'query_info': queryInfo, 'region_info': regionInfo}
+
   });
   const listings = [];
-  for (const queryInfo of listingsQueryInfo) {
+  for (const listingQueryInfo of listingsQueryInfo) {
     const params = {
       'num_homes': '1', // the number of homes will be multiplied by the number of places returned by the autocomplete api. Increase this value from searchFilters if you want more results.
       'sf': '1,2,3,5,6,7', // MLS listings included
-      ...queryInfo,
+      ...listingQueryInfo['query_info'],
       ...searchFilters
     };
     if (verbose) {
       console.log('getRedfinPropertyListingsFromLocation: params:', params);
     }
+    const propertyListingsData = await getPropertyListingsData(params, verbose);
+    listings.push({
+      'region_info': listingQueryInfo['region_info'],
+      'homes': propertyListingsData.data.homes,
+    });
     listings.push(await getPropertyListingsData(params, verbose));
   }
+  if (verbose) {
+    console.log('getRedfinPropertyListingsFromLocation: listings:', listings);
+  }
   return listings;
+}
+
+function urlToRegionType(url) {
+  /*
+  One of the following : -1:Unknowns|1:Neighborhood|2:Zip Code|4:State|5:County|6:City|7:School|8:School District|9:Service Region|10:Minor Civil Division|11:Country|30:CA Postal Code|31:CA Province|32:CA Provincial Division|33:CA Municipality|34:CA Forward Sortation Area
+  You need to use regex to examine the value of url field returned in …/auto-complete for suitable value. Ex : '/city/30749/…', it is city so it is 6 in this case.
+  */
+  const regex = /\/(\w+)\/\d+\//;
+  const match = regex.exec(url);
+  if (match) {
+    const regionType = match[1];
+    switch (regionType) {
+      case 'neighborhood':
+        return 1;
+      case 'zip':
+        return 2;
+      case 'state':
+        return 4;
+      case 'county':
+        return 5;
+      case 'city':
+        return 6;
+      case 'school':
+        return 7;
+      case 'school-district':
+        return 8;
+      case 'service-region':
+        return 9;
+      case 'minor-civil-division':
+        return 10;
+      case 'country':
+        return 11;
+      case 'ca-postal-code':
+        return 30;
+      case 'ca-province':
+        return 31;
+      case 'ca-provincial-division':
+        return 32;
+      case 'ca-municipality':
+        return 33;
+      case 'ca-forward-sortation-area':
+        return 34;
+      default:
+        return -1;
+    }
+  }
 }
 
 function verboseAxiosInterceptor(functionName, verbose = false) {
