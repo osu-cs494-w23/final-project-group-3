@@ -25,7 +25,7 @@ function ListingCardList(props) {
 
     return (
         <>
-            <h1>Recomended listings in {region}</h1>
+            <h1>Featured listings in {region}</h1>
             <ListingList>
                 {listings}
             </ListingList>
