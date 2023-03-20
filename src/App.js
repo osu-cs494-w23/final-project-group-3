@@ -27,6 +27,23 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root></Root>,
+      children: [
+        {
+          path: "/redfin/test",
+          element: <RedfinTest></RedfinTest>
+        },
+        {
+          path: "/history",
+          element: <History />
+        }
+      ]
+    }
+  ]);
+
   return (
     <RouterProvider router={router}/>
   )
