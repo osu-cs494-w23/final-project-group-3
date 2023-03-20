@@ -1,6 +1,6 @@
 import React from "react"
-import { useState } from "react"
-import { useSearchParams } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import { useSearchParams, NavLink } from 'react-router-dom'
 import ListingCardList from "./ListingCardList";
 
 import useCSV from "../hooks/useCSV";
@@ -21,6 +21,10 @@ function Home() {
     const [ searchParams, setSearchParams ] = useSearchParams()
     const { data, isLoading } = useCSV(csvFilePath)
     const regions = data.data
+
+	useEffect(() => {
+		setSearchParams({ q: "Corvallis" })
+	}, [])
 
 	return (
 		<div id="home">
@@ -44,7 +48,9 @@ function Home() {
 						&& regions.map(region => (
 							verifyInput(searchParams.get("q"), region.RegionName) && 
 								(
-									<ListingCardList region={region.RegionName}/>
+									<div key={region.RegionName}>
+										<ListingCardList region={region.RegionName}/>
+									</div>
 								)
 							))
 					}
