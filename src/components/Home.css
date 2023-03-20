@@ -56,6 +56,10 @@
 	cursor: pointer;
 }
 
+#submit:active {
+	background-color: lightblue;
+}
+
 #mag {
 	width: 30px;
 	height: 30px;
@@ -64,7 +68,6 @@
 #featured {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid black;
 }
 
 #featured-text {

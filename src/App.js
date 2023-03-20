@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <History />
       },
 	  {
-        path: "/home",
+        path: "/",
         element: <Home />
       }
     ]
