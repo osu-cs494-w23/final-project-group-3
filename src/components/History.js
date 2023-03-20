@@ -44,6 +44,13 @@ const SearchContainer = styled.form`
     padding: 10px;
 `
 
+const CaptionContainer = styled.div`
+    text-align: center;
+    border: 1px solid dimgray;
+    margin: 15px;
+    margin-top: 0;
+`
+
 function getDates(region) {
     const keys = Object.keys(region).map(field => field)
     return keys.splice(5)
@@ -84,12 +91,15 @@ function History() {
                         (
                             <div key={region.RegionName}>
                                 <PriceHistoryChart name={region.RegionName} xAxis={getDates(region)} yAxis={getPrices(region)} />
-                                <p>
-                                    Zillow Home Value Index (ZHVI): A measure of the typical home value and 
-                                    market changes across a given region for all housing types.
-                                    It reflects the typical value for homes in the 35th to 65th percentile range.
-                                    Data rendered as smoothed, seasonally adjusted measure.
-                                </p>
+                                <CaptionContainer>
+                                    <p>
+                                        Zillow Home Value Index (ZHVI): A measure of the typical home value and 
+                                        market changes across a given region for all housing types.
+                                        It reflects the typical value for homes in the 35th to 65th percentile range.
+                                        Data rendered as smoothed, seasonally adjusted measure.
+                                    </p>
+                                </CaptionContainer>
+
                                 <FeaturedListingCardList region={region.RegionName} context={useOutletContext}/>
                             </div>
                         )
