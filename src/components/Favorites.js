@@ -3,7 +3,6 @@ import styled from '@emotion/styled/macro'
 import { useOutletContext } from "react-router-dom";
 import ListingCard from "./ListingCard";
 
-
 const Title = styled.h1`
     text-align: center;
 `

@@ -1,7 +1,5 @@
 import styled from '@emotion/styled/macro'
-import { useState } from 'react'
 import { useOutletContext } from "react-router-dom";
-
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
