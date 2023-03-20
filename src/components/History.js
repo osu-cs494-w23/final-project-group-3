@@ -6,7 +6,7 @@ import { useOutletContext } from "react-router-dom";
 import useCSV from "../hooks/useCSV";
 
 import PriceHistoryChart from "./PriceHistoryChart";
-import ListingCardList from "./ListingCardList";
+import ListingCardList from "./FeaturedListingCardList";
 import Loading from "./Loading";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
