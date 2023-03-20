@@ -1,8 +1,9 @@
-import './App.css';
+// import './App.css';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
 import RedfinTest from "./components/RedfinTest";
 import History from './components/History';
+import Home from './components/Home';
 
 function App() {
   const router = createBrowserRouter([
