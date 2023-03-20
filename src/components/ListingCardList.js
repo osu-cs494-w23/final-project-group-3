@@ -16,11 +16,11 @@ function ListingCardList(props) {
     let id = 0
 
     const listings = [
-        <ListingCard context={useOutletContext} id={++id}/>,
-        <ListingCard context={useOutletContext} id={++id}/>,
-        <ListingCard context={useOutletContext} id={++id}/>,
-        <ListingCard context={useOutletContext} id={++id}/>,
-        <ListingCard context={useOutletContext} id={++id}/>
+        <ListingCard key={id} context={useOutletContext} id={++id}/>,
+        <ListingCard key={id} context={useOutletContext} id={++id}/>,
+        <ListingCard key={id} context={useOutletContext} id={++id}/>,
+        <ListingCard key={id} context={useOutletContext} id={++id}/>,
+        <ListingCard key={id} context={useOutletContext} id={++id}/>
     ]
 
     return (
