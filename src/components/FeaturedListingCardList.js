@@ -16,14 +16,14 @@ function ListingCardList(props) {
     const region = props.region ? props.region : "your area"
     let id = 0
 
-    const [listings] = useRedfinApiPropertyListingsFromLocation(region,  null, false, 5)
-    // console.log(listings)
-    const listingsArray = listings.data
-    // console.log(listingsArray)
-    const listingsData = listingsArray.map(listing => listing.homes[0].homeData)
-    console.log("listingsData", listingsData)
-    {listingsData.map(listing => console.log("propertyId", listing.propertyId, "listing", listing))}
-    // if (listingsData[0].propertyId)
+    // const [listings] = useRedfinApiPropertyListingsFromLocation(region,  null, false, 5)
+    // // console.log(listings)
+    // const listingsArray = listings.data
+    // // console.log(listingsArray)
+    // const listingsData = listingsArray.map(listing => listing.homes[0].homeData)
+    // console.log("listingsData", listingsData)
+    // {listingsData.map(listing => console.log("propertyId", listing.propertyId, "listing", listing))}
+    // // if (listingsData[0].propertyId)
 
     const placeholderListings = [
         <ListingCard key={id} context={useOutletContext} id={++id}/>,
@@ -37,8 +37,8 @@ function ListingCardList(props) {
         <>
             <h1>Featured listings in {region}</h1>
             <ListingList>
-                {/* {placeholderListings} */}
-                {listingsData.map(listing => <ListingCard key={listing.propertyId} id={listing.propertyId} data={listing} context={useOutletContext}/>)}
+                {placeholderListings}
+                {/* {listingsData.map(listing => <ListingCard key={listing.propertyId} id={listing.propertyId} data={listing} context={useOutletContext}/>)} */}
             </ListingList>
         </>
     )
