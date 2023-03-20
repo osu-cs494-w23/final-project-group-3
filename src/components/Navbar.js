@@ -4,12 +4,10 @@ import styled from '@emotion/styled/macro'
 
 const NavbarContainer = styled.div`
     display: flex;
-    overflow: hidden;
     background-color: dodgerblue;
-    z-index: 1;
+    width: 100vw;
     top: 0;
     padding: 0;
-    padding-bottom: 0px;
     justify-content: space-evenly;
     a{
         color: Cornsilk;
