@@ -8,6 +8,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const ChartContainer = styled.div`
     border: 1px solid dimgray;
+    margin: 15px;
 `
  
 function PriceHistoryChart(props) {
