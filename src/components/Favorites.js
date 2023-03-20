@@ -3,6 +3,10 @@ import styled from '@emotion/styled/macro'
 import { useOutletContext } from "react-router-dom";
 import ListingCard from "./ListingCard";
 
+const HeadingContainer = styled.div`
+    text-align: center;
+`
+
 const Title = styled.h1`
     text-align: center;
 `
@@ -22,7 +26,10 @@ function Favorites() {
 
     return (
         <>
-            <Title>Your favorite listings</Title>
+            <HeadingContainer>
+                <Title>Your favorite listings</Title>
+                <p>Filters?</p>
+            </HeadingContainer>
             <ListingGrid>
                 {listingIds.map(id => <ListingCard key={id[0]} context={useOutletContext} id={id[0]} />)}
             </ListingGrid>
