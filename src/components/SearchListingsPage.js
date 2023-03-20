@@ -5,7 +5,7 @@ function SearchListingsPage(props) {
   return (
       <div>
         <SearchFilterBar></SearchFilterBar>
-        <p>Search Listings Page</p>
+        <SearchResults></SearchResults>
       </div>
   )
 }
@@ -13,6 +13,12 @@ function SearchListingsPage(props) {
 function SearchFilterBar(props) {
   return (
     <p>Search Filter Bar</p>
+  )
+}
+
+function SearchResults(props) {
+  return (
+    <p>Search Results</p>
   )
 }
 
