@@ -1,5 +1,7 @@
 import styled from '@emotion/styled/macro'
 import { useState } from 'react'
+import { useOutletContext } from "react-router-dom";
+
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
@@ -38,8 +40,10 @@ const DataContainer = styled.div`
 
 function ListingCard(props) {
     const id = props.id
-    const addFavoriteListing = props.createFavoriteListingsCallback
-    const removeFavoriteListing = props.removeFavoriteListing
+    // const addFavoriteListing = props.createFavoriteListingsCallback
+    // const removeFavoriteListing = props.removeFavoriteListing
+
+    const {favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings} = useOutletContext()
 
     const [favorite, setFavorite] = useState(false)
 

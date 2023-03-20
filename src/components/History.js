@@ -1,6 +1,7 @@
 import React from "react"
 import { useState } from "react";
 import { useSearchParams } from 'react-router-dom'
+import { useOutletContext } from "react-router-dom";
 
 import useCSV from "../hooks/useCSV";
 
@@ -33,6 +34,9 @@ function History() {
     const { data, isLoading } = useCSV(csvFilePath)
     const regions = data.data
     
+    const {favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings} = useOutletContext()
+    console.log("In History", favoriteListings)
+
     return (
         <>
             <form onSubmit={e => {
@@ -57,7 +61,7 @@ function History() {
                                     Data rendered as smoothed, seasonally adjusted measure.
                                 </p>
                                 {/* <Region key={region.RegionID} region={region} display={searchParams.get("q")} /> */}
-                                <ListingCardList region={region.RegionName}/>
+                                <ListingCardList region={region.RegionName} context={useOutletContext}/>
                             </div>
                         )
                     ))

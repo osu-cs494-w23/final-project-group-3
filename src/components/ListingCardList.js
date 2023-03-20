@@ -1,5 +1,6 @@
 import styled from '@emotion/styled/macro'
 import { useState } from 'react'
+import { useOutletContext } from "react-router-dom";
 
 import ListingCard from './ListingCard'
 
@@ -12,36 +13,46 @@ const ListingList = styled.ul`
 
 function ListingCardList(props) {
     const region = props.region ? props.region : "your area"
+    // const getFavoriteListings = props.getFavoriteListings
 
-    const [ favoriteListings, setFavoriteListings ] = useState({})
+    const {favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings} = useOutletContext()
+    console.log("In ListingCardList", favoriteListings)
 
-    function addFavoriteListing(listingId, regionId, type, uipt, status) {
-        let newFavoriteListings = {
-            ...favoriteListings,
-        }
-        newFavoriteListings[listingId] = {region_id: regionId, type: type, uipt: uipt, status: status}
-        setFavoriteListings(newFavoriteListings)
-    }
+    // const [ favoriteListings, setFavoriteListings ] = useState({})
 
-    function removeFavoriteListing(listingId) {
-        const newFavoriteListings = {
-            ...favoriteListings
-        }
-        delete newFavoriteListings[listingId]
-        setFavoriteListings(newFavoriteListings)
-    }
+    // function addFavoriteListing(listingId, regionId, type, uipt, status) {
+    //     let newFavoriteListings = {
+    //         ...favoriteListings,
+    //     }
+    //     newFavoriteListings[listingId] = {region_id: regionId, type: type, uipt: uipt, status: status}
+    //     setFavoriteListings(newFavoriteListings)
+    // }
 
-    function getFavoriteListings() {
-        return favoriteListings
-    }
+    // function removeFavoriteListing(listingId) {
+    //     const newFavoriteListings = {
+    //         ...favoriteListings
+    //     }
+    //     delete newFavoriteListings[listingId]
+    //     setFavoriteListings(newFavoriteListings)
+    // }
+
+    // function getFavoriteListings() {
+    //     return favoriteListings
+    // }
 
     let id = 0
     const listings = [
-        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>
+        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
+        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>
+        <ListingCard context={useOutletContext} id={++id}/>,
+        <ListingCard context={useOutletContext} id={++id}/>,
+        <ListingCard context={useOutletContext} id={++id}/>,
+        <ListingCard context={useOutletContext} id={++id}/>,
+        <ListingCard context={useOutletContext} id={++id}/>
+
     ]
 
     return (
