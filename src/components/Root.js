@@ -1,8 +1,10 @@
+/** @jsxImportSource @emotion/react */
+
 import React, { useState } from "react";
 import {Outlet} from "react-router";
 
 import Header from "./Header";
-import styled from "@emotion/styled/macro";
+import {css} from "@emotion/react";
 
 function Root(props) {
 
@@ -27,32 +29,36 @@ function Root(props) {
   function getFavoriteListings() {
       return favoriteListings
   }
-  const RootContainer = styled.div`
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      min-width: 100vw;
-      `;
-  const HeaderContainer = styled.div`
-      display: flex;
-      min-height: auto;
-      width: 100%;
-      `;
-  const Container = styled.div`
-      display: block;
-      flex-direction: column;
-      overflow-y: scroll;
-      min-height: auto;
-      `;
+
+  const rootContainerStyle = css`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 100vw;
+  `;
+
+  const headerContainerStyle = css`
+    display: flex;
+    min-height: auto;
+    width: 100%;
+  `;
+
+  const containerStyle = css`
+    display: block;
+    flex-direction: column;
+    overflow-y: scroll;
+    min-height: auto;
+  `;
+
   return (
-      <RootContainer>
-        <HeaderContainer>
+      <div css={rootContainerStyle}>
+        <div css={headerContainerStyle}>
           <Header />
-        </HeaderContainer>
-        <Container>
-        <Outlet context={{ addFavoriteListing, removeFavoriteListing, getFavoriteListings }} />
-        </Container>
-      </RootContainer>
+        </div>
+        <div css={containerStyle}>
+          <Outlet context={{ addFavoriteListing, removeFavoriteListing, getFavoriteListings }} />
+        </div>
+      </div>
   );
 }
 
