@@ -17,26 +17,24 @@ const breakpoints = {
     med: 1024
 }
 
-const Button = styled.button`
-    font-size: 20px;
-    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
+const media = 
+    `@media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
         font-size: 24px;
     }
     @media (max-width: ${breakpoints.sm}px) {
         font-size: 32px;
-    }
+    }`
+
+const Button = styled.button`
+    font-size: 20px;
+    ${media}
 `
 
 const Input = styled.input`
     border: 1px solid #ababab;
     padding: 2px;
     font-size: 20px;
-    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
-        font-size: 24px;
-    }
-    @media (max-width: ${breakpoints.sm}px) {
-        font-size: 32px;
-    }
+    ${media}
 `
 
 const SearchContainer = styled.form`
@@ -45,7 +43,9 @@ const SearchContainer = styled.form`
 `
 
 const CaptionContainer = styled.div`
-    text-align: center;
+    // text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
     border: 1px solid dimgray;
     margin: 15px;
     margin-top: 0;
