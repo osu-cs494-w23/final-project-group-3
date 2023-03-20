@@ -1,9 +1,10 @@
-import './App.css';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
 import RedfinTest from "./components/RedfinTest";
 import History from './components/History';
-import Home from './components/Home';
+import SearchListingsPage from "./components/SearchListingsPage";
+import {css, Global} from "@emotion/react";
+import Favorites from "./components/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -39,13 +40,41 @@ function App() {
         {
           path: "/history",
           element: <History />
+        },
+        {
+          path: "/search",
+          element: <SearchListingsPage />
+        },
+        {
+          path: "/favorites",
+          element: <Favorites />
         }
       ]
     }
   ]);
 
   return (
-    <RouterProvider router={router}/>
+      <div>
+        <Global
+            styles={css`
+            body {
+              margin: 0;
+              padding: 0;
+              min-height: 100vh;
+              max-width: 100vw;
+              overflow-y: hidden;
+            }
+          `}
+        />
+        <Global
+            styles={{
+              'body.noScroll': {
+                overflow: 'hidden',
+              },
+            }}
+        />
+        <RouterProvider router={router}/>
+        </div>
   )
 }
 

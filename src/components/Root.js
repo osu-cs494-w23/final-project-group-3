@@ -1,13 +1,10 @@
+/** @jsxImportSource @emotion/react */
+
 import React, { useState } from "react";
-import logo from "../logo.svg";
 import {Outlet} from "react-router";
-import styled from '@emotion/styled/macro'
 
 import Header from "./Header";
-
-const BodyContainer = styled.div`
-  margin-top: 100px;
-`
+import {css} from "@emotion/react";
 
 function Root(props) {
 
@@ -33,15 +30,34 @@ function Root(props) {
       return favoriteListings
   }
 
+  const rootContainerStyle = css`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 100vw;
+  `;
+
+  const headerContainerStyle = css`
+    display: flex;
+    min-height: auto;
+    width: 100%;
+  `;
+
+  const containerStyle = css`
+    display: block;
+    flex-direction: column;
+    overflow-y: scroll;
+    min-height: auto;
+  `;
+
   return (
-      <div className="App">
-        <Header />
-        <header className="App-header">
-          <BodyContainer>
-            <Outlet context={{favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings}} />
-            {/* {console.log("favoriteListings from Root:", favoriteListings)} */}
-          </BodyContainer>
-        </header>
+      <div css={rootContainerStyle}>
+        <div css={headerContainerStyle}>
+          <Header />
+        </div>
+        <div css={containerStyle}>
+          <Outlet context={{ addFavoriteListing, removeFavoriteListing, getFavoriteListings }} />
+        </div>
       </div>
   );
 }
