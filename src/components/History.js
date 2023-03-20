@@ -18,6 +18,7 @@ const breakpoints = {
 }
 
 const Button = styled.button`
+    font-size: 20px;
     @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
         font-size: 24px;
     }
@@ -28,8 +29,8 @@ const Button = styled.button`
 
 const Input = styled.input`
     border: 1px solid #ababab;
-    padding: 5px;
-    font-size: 18px;
+    padding: 2px;
+    font-size: 20px;
     @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
         font-size: 24px;
     }
@@ -40,6 +41,7 @@ const Input = styled.input`
 
 const SearchContainer = styled.form`
     text-align: center;
+    padding: 10px;
 `
 
 function getDates(region) {
