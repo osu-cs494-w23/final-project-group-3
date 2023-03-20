@@ -5,27 +5,7 @@ import History from './components/History';
 import SearchListingsPage from "./components/SearchListingsPage";
 import {css, Global} from "@emotion/react";
 import Favorites from "./components/Favorites";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root></Root>,
-    children: [
-      {
-        path: "/redfin/test",
-        element: <RedfinTest></RedfinTest>
-      },
-      {
-        path: "/history",
-        element: <History />
-      },
-	  {
-        path: "/",
-        element: <Home></Home>
-      }
-    ]
-  }
-]);
+import Home from "./components/Home"
 
 function App() {
   const router = createBrowserRouter([
@@ -33,6 +13,10 @@ function App() {
       path: "/",
       element: <Root></Root>,
       children: [
+		{
+			path: "/",
+			element: <Home></Home>
+		},
         {
           path: "/redfin/test",
           element: <RedfinTest></RedfinTest>
