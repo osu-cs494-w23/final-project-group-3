@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from '@emotion/styled/macro'
 
 import CanvasJSReact from "../assets/canvasjs.react";
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
+const ChartContainer = styled.div`
+    border: 1px solid dimgray;
+`
  
 function PriceHistoryChart(props) {
     const dataPoints = props.xAxis.map( (x, y) =>  ({ x: new Date(x), y: Number(props.yAxis[y]) }) )
@@ -42,12 +47,12 @@ function PriceHistoryChart(props) {
     }
     
     return (
-    <div>
-        <CanvasJSChart options = {options} 
-            /* onRef={ref => this.chart = ref} */
-        />
-        {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-    </div>
+        <ChartContainer>
+            <CanvasJSChart options = {options} 
+                /* onRef={ref => this.chart = ref} */
+            />
+            {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
+        </ChartContainer>
     )
 }
  
