@@ -17,13 +17,14 @@ const breakpoints = {
     med: 1024
 }
 
-const media = 
-    `@media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
+const media = `
+    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
         font-size: 24px;
     }
     @media (max-width: ${breakpoints.sm}px) {
         font-size: 32px;
-    }`
+    }
+`
 
 const Button = styled.button`
     font-size: 20px;
