@@ -7,7 +7,7 @@ import ListingCard from './ListingCard'
 const ListingList = styled.ul`
     // border: 1px solid dimgray;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     padding: 0;
 `
 
