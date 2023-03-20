@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import logo from "../logo.svg";
 import {Outlet} from "react-router";
-import styled from '@emotion/styled/macro'
 
 import Header from "./Header";
-
-const BodyContainer = styled.div`
-  margin-top: 100px;
-`
 
 function Root(props) {
 
@@ -34,14 +28,10 @@ function Root(props) {
   }
 
   return (
-      <div className="App">
+      <div>
         <Header />
-        <header className="App-header">
-          <BodyContainer>
             <Outlet context={{favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings}} />
             {/* {console.log("favoriteListings from Root:", favoriteListings)} */}
-          </BodyContainer>
-        </header>
       </div>
   );
 }
