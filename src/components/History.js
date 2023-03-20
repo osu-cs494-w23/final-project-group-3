@@ -2,6 +2,7 @@ import React from "react"
 import { useState } from "react";
 import { useSearchParams } from 'react-router-dom'
 import { useOutletContext } from "react-router-dom";
+import styled from '@emotion/styled/macro'
 
 import useCSV from "../hooks/useCSV";
 
@@ -10,6 +11,36 @@ import FeaturedListingCardList from "./FeaturedListingCardList";
 import Loading from "./Loading";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
+
+const breakpoints = {
+    sm: 768,
+    med: 1024
+}
+
+const Button = styled.button`
+    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
+        font-size: 24px;
+    }
+    @media (max-width: ${breakpoints.sm}px) {
+        font-size: 32px;
+    }
+`
+
+const Input = styled.input`
+    border: 1px solid #ababab;
+    padding: 5px;
+    font-size: 18px;
+    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
+        font-size: 24px;
+    }
+    @media (max-width: ${breakpoints.sm}px) {
+        font-size: 32px;
+    }
+`
+
+const SearchContainer = styled.form`
+    text-align: center;
+`
 
 function getDates(region) {
     const keys = Object.keys(region).map(field => field)
@@ -36,14 +67,14 @@ function History() {
 
     return (
         <>
-            <form onSubmit={e => {
+            <SearchContainer onSubmit={e => {
                 e.preventDefault()
                 setSearchParams({ q: inputQuery })
                 console.log(searchParams.get("q"))
             }}>
-                <input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/>
-                <button type="submit">Search</button>
-            </form>
+                <Input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/>
+                <Button type="submit">Search</Button>
+            </SearchContainer>
             {isLoading && <Loading />}
             {regions && searchParams.get("q")
                 && regions.map(region => (
