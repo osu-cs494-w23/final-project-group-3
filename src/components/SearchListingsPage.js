@@ -1,6 +1,7 @@
 import styled from "@emotion/styled/macro";
 import { useState } from "react";
 import { useRedfinApiPropertyListingsFromLocation} from "../hooks/useRedfinApi";
+import ListingCard from "./ListingCard";
 
 function SearchListingsPage(props) {
   const Container = styled.div({
@@ -12,13 +13,17 @@ function SearchListingsPage(props) {
 
   const [searchData, setSearchData] = useState({
     location: "Corvallis Oregon",
-    searchFilters: {}
+    searchFilters: {
+      'num_homes': '40',
+    }
   });
+
+  const [searchResults] = useRedfinApiPropertyListingsFromLocation(searchData.location, searchData.searchFilters, true, 1);
 
   return (
       <Container>
-        <SearchFilterBar onSearch={setSearchData}></SearchFilterBar>
-        <SearchResults></SearchResults>
+        <SearchFilterBar setSearchData={setSearchData}></SearchFilterBar>
+        <SearchResults searchResults={searchResults}></SearchResults>
       </Container>
   )
 }
@@ -42,8 +47,6 @@ function SearchFilterBar(props) {
     margin: "5px",
   });
 
-  const setSearchData = props.setSearchData;
-
   const onSubmit = (event) => {
     event.preventDefault();
     const location = document.getElementById("location-form").value;
@@ -61,8 +64,7 @@ function SearchFilterBar(props) {
       'location': location,
       'searchFilters': searchFilters,
     }
-
-    //onSearch(searchData);
+    props.setSearchData(searchData);
   }
 
   // A horizontal bar with a search box and a search button
@@ -81,9 +83,68 @@ function SearchFilterBar(props) {
 }
 
 function SearchResults(props) {
+  const Container = styled.div({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightgray",
+  });
+
+  const HeadingContainer = styled.div({
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightgray",
+  });
+
+  const ResultsContainer = styled.div({
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "lightgray",
+  });
+
+  const Heading = styled.h1({
+    margin: "0px",
+    padding: "0px",
+  });
+
+  const searchResults = props.searchResults;
+
+  console.log(searchResults);
   return (
-    <p>Search Results</p>
-  )
+      <Container>
+        <HeadingContainer>
+          <Heading>Search Results</Heading>
+        </HeadingContainer>
+        { (!searchResults.isError) && (!searchResults.isLoading) && searchResults.data.map((searchResult) => {
+          const regionName = searchResult['region_info']['name'];
+          const regionId = searchResult['region_info']['id'];
+          const propertyListings = searchResult['homes'];
+          return (
+              <Container id={regionId}>
+                <HeadingContainer>
+                  <Heading>{regionName}</Heading>
+                </HeadingContainer>
+                <ResultsContainer>
+                  {propertyListings.map((propertyListing) => {
+
+                    const homeData = propertyListing['homeData'];
+                    const propertyId = homeData['propertyId'];
+
+                    return(
+                        <ListingCard id={propertyId} homeData={homeData}></ListingCard>
+                    );
+                  })}
+                </ResultsContainer>
+              </Container>
+          );
+        })}
+      </Container>
+  );
 }
 
 export default SearchListingsPage;
