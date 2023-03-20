@@ -3,9 +3,9 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
 import RedfinTest from "./components/RedfinTest";
 import History from './components/History';
-import Home from './components/Home';
 import SearchListingsPage from "./components/SearchListingsPage";
 import {css, Global} from "@emotion/react";
+import Favorites from "./components/Favorites";
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +25,10 @@ function App() {
           path: "/search",
           element: <SearchListingsPage />
         },
+        {
+          path: "/favorites",
+          element: <Favorites />
+        }
       ]
     }
   ]);
@@ -44,8 +48,6 @@ function App() {
         <Global
             styles={{
               'body.noScroll': {
-                // Prevent scrolling; conditionally activate this
-                // in subcomponents when necessary ...
                 overflow: 'hidden',
               },
             }}

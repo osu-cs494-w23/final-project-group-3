@@ -30,8 +30,7 @@ function Root(props) {
   return (
       <div>
         <Header />
-            <Outlet context={{favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings}} />
-            {/* {console.log("favoriteListings from Root:", favoriteListings)} */}
+          <Outlet context={{ addFavoriteListing, removeFavoriteListing, getFavoriteListings }} />
       </div>
   );
 }

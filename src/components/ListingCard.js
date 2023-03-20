@@ -1,7 +1,5 @@
 import styled from '@emotion/styled/macro'
-import { useState } from 'react'
 import { useOutletContext } from "react-router-dom";
-
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
@@ -40,19 +38,18 @@ const DataContainer = styled.div`
 
 function ListingCard(props) {
     const id = props.id
-    const { addFavoriteListing, removeFavoriteListing } = useOutletContext()
-    const [favorite, setFavorite] = useState(false)
+    const { getFavoriteListings, addFavoriteListing, removeFavoriteListing } = useOutletContext()
+    const favorites = getFavoriteListings()
 
-    let buttonImage = favorite ? '❤️' : '🤍'
-    
+    let buttonImage = favorites[id] ? '❤️' : '🤍'
+
     function handleFavoriteChange() {
-        if (!favorite) {
+        if (!favorites[id]) {
             addFavoriteListing(id, 'region_id', 'type', '1,2,3,4,7,8', '9')
         }
         else {
             removeFavoriteListing(id)
         }
-        setFavorite(!favorite)
     }
 
     return (
