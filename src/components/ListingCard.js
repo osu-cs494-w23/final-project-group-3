@@ -37,6 +37,8 @@ const ArticleContainer = styled.article`
 
 function ListingCard(props) {
     const id = props.id
+    const regionId = props.regionId;
+    const type = props.type;
     const homeData = props.homeData;
     const { getFavoriteListings, addFavoriteListing, removeFavoriteListing } = useOutletContext()
     const favorites = getFavoriteListings()
@@ -45,7 +47,7 @@ function ListingCard(props) {
 
     function handleFavoriteChange() {
         if (!favorites[id]) {
-            addFavoriteListing(id, 'region_id', 'type', '1,2,3,4,7,8', '9')
+            addFavoriteListing(id, regionId, type, '1,2,3,4,7,8', '9', homeData)
         }
         else {
             removeFavoriteListing(id)

@@ -123,6 +123,7 @@ function SearchResults(props) {
         { (!searchResults.isError) && (!searchResults.isLoading) && searchResults.data.map((searchResult) => {
           const regionName = searchResult['region_info']['name'];
           const regionId = searchResult['region_info']['id'];
+          const regionType = searchResult['region_info']['type'];
           const propertyListings = searchResult['homes'];
           return (
               <Container id={regionId}>
@@ -136,7 +137,7 @@ function SearchResults(props) {
                     const propertyId = homeData['propertyId'];
 
                     return(
-                        <ListingCard id={propertyId} homeData={homeData}></ListingCard>
+                        <ListingCard id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
                     );
                   })}
                 </ResultsContainer>
