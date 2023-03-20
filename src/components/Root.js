@@ -27,30 +27,34 @@ function Root(props) {
   function getFavoriteListings() {
       return favoriteListings
   }
+  
   const RootContainer = styled.div`
       display: flex;
       flex-direction: column;
       height: 100vh;
       min-width: 100vw;
       `;
+
   const HeaderContainer = styled.div`
       display: flex;
       min-height: auto;
       width: 100%;
       `;
+
   const Container = styled.div`
       display: block;
       flex-direction: column;
       overflow-y: scroll;
       min-height: auto;
       `;
+
   return (
       <RootContainer>
         <HeaderContainer>
           <Header />
         </HeaderContainer>
         <Container>
-        <Outlet context={{ addFavoriteListing, removeFavoriteListing, getFavoriteListings }} />
+          <Outlet context={{ addFavoriteListing, removeFavoriteListing, getFavoriteListings }} />
         </Container>
       </RootContainer>
   );
