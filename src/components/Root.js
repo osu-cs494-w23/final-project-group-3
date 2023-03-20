@@ -39,7 +39,6 @@ function Root(props) {
         <header className="App-header">
           <BodyContainer>
             <Outlet context={{ addFavoriteListing, removeFavoriteListing, getFavoriteListings }} />
-            {/* {console.log("favoriteListings from Root:", favoriteListings)} */}
           </BodyContainer>
         </header>
       </div>
