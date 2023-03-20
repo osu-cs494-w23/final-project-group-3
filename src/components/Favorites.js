@@ -3,6 +3,11 @@ import styled from '@emotion/styled/macro'
 import { useOutletContext } from "react-router-dom";
 import ListingCard from "./ListingCard";
 
+
+const Title = styled.h1`
+    text-align: center;
+`
+
 const ListingGrid = styled.div`
     // border: 1px solid dimgray;
     display: grid;
@@ -18,10 +23,10 @@ function Favorites() {
 
     return (
         <>
+            <Title>Your favorite listings</Title>
             <ListingGrid>
                 {listingIds.map(id => <ListingCard key={id[0]} context={useOutletContext} id={id[0]} />)}
             </ListingGrid>
-            <h1>This is the favorites route</h1>
         </>
     )
 }
