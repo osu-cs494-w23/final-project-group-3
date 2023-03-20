@@ -1,8 +1,18 @@
 import {useRedfinApiPropertyListingsFromLocation} from "../hooks/useRedfinApi";
 
 function SearchListingsPage(props) {
+
   return (
-    <p>Search Listings Page</p>
+      <div>
+        <SearchFilterBar></SearchFilterBar>
+        <p>Search Listings Page</p>
+      </div>
+  )
+}
+
+function SearchFilterBar(props) {
+  return (
+    <p>Search Filter Bar</p>
   )
 }
 
