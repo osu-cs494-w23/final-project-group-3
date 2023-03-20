@@ -10,15 +10,14 @@ function SearchListingsPage(props) {
     margin: "0px",
   });
 
-
-  const onSearch = (location, searchFilters) => {
-    console.log(location);
-    console.log(searchFilters);
-  }
+  const [searchData, setSearchData] = useState({
+    location: "Corvallis Oregon",
+    searchFilters: {}
+  });
 
   return (
       <Container>
-        <SearchFilterBar onSearch={onSearch}></SearchFilterBar>
+        <SearchFilterBar onSearch={setSearchData}></SearchFilterBar>
         <SearchResults></SearchResults>
       </Container>
   )
@@ -43,8 +42,8 @@ function SearchFilterBar(props) {
     margin: "5px",
   });
 
-  const onSearch = props.onSearch;
-  
+  const setSearchData = props.setSearchData;
+
   const onSubmit = (event) => {
     event.preventDefault();
     const location = document.getElementById("location-form").value;
@@ -58,7 +57,12 @@ function SearchFilterBar(props) {
       'min_beds': minBeds,
       'min_baths': minBaths,
     };
-    onSearch(location, searchFilters);
+    const searchData = {
+      'location': location,
+      'searchFilters': searchFilters,
+    }
+
+    //onSearch(searchData);
   }
 
   // A horizontal bar with a search box and a search button
