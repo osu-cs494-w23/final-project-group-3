@@ -6,7 +6,7 @@ import { useOutletContext } from "react-router-dom";
 import useCSV from "../hooks/useCSV";
 
 import PriceHistoryChart from "./PriceHistoryChart";
-import ListingCardList from "./FeaturedListingCardList";
+import FeaturedListingCardList from "./FeaturedListingCardList";
 import Loading from "./Loading";
 
 const csvFilePath = require("../data/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv")
@@ -57,7 +57,7 @@ function History() {
                                     It reflects the typical value for homes in the 35th to 65th percentile range.
                                     Data rendered as smoothed, seasonally adjusted measure.
                                 </p>
-                                <ListingCardList region={region.RegionName} context={useOutletContext}/>
+                                <FeaturedListingCardList region={region.RegionName} context={useOutletContext}/>
                             </div>
                         )
                     ))

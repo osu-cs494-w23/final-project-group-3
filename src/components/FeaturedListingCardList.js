@@ -12,7 +12,7 @@ const ListingList = styled.ul`
     padding: 0;
 `
 
-function ListingCardList(props) {
+function FeaturedListingCardList(props) {
     const region = props.region ? props.region : "your area"
     let id = 0
 
@@ -44,4 +44,4 @@ function ListingCardList(props) {
     )
 }
 
-export default ListingCardList
+export default FeaturedListingCardList
