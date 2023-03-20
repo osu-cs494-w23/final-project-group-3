@@ -3,7 +3,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
 import RedfinTest from "./components/RedfinTest";
 import History from './components/History';
-import Home from './components/Home';
+import Favorites from "./components/Favorites";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +18,10 @@ function App() {
         {
           path: "/history",
           element: <History />
+        },
+        {
+          path: "/favorites",
+          element: <Favorites />
         }
       ]
     }
