@@ -42,6 +42,7 @@ function App() {
               padding: 0;
               min-height: 100vh;
               max-width: 100vw;
+              overflow-y: hidden;
             }
           `}
         />
@@ -52,7 +53,7 @@ function App() {
               },
             }}
         />
-    <RouterProvider router={router}/>
+        <RouterProvider router={router}/>
         </div>
   )
 }
