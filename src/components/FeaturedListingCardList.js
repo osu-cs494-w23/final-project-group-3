@@ -11,6 +11,9 @@ const ListingList = styled.ul`
     justify-content: center;
     padding: 0;
 `
+const FeaturedListingsContainer = styled.div`
+    margin: 15px;
+`
 
 function FeaturedListingCardList(props) {
     const region = props.region ? props.region : "your area"
@@ -34,13 +37,13 @@ function FeaturedListingCardList(props) {
     ]
 
     return (
-        <>
+        <FeaturedListingsContainer>
             <h1>Featured listings in {region}</h1>
             <ListingList>
                 {placeholderListings}
                 {/* {listingsData.map(listing => <ListingCard key={listing.propertyId} id={listing.propertyId} data={listing} context={useOutletContext}/>)} */}
             </ListingList>
-        </>
+        </FeaturedListingsContainer>
     )
 }
 

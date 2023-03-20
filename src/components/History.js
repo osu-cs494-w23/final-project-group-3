@@ -101,7 +101,6 @@ function History() {
                                         Data rendered as smoothed, seasonally adjusted measure.
                                     </p>
                                 </CaptionContainer>
-
                                 <FeaturedListingCardList region={region.RegionName} context={useOutletContext}/>
                             </div>
                         )
