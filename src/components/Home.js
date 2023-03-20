@@ -1,7 +1,7 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { useSearchParams, NavLink } from 'react-router-dom'
-import ListingCardList from "./ListingCardList";
+import FeaturedListingCardList from "./FeaturedListingCardList";
 
 import useCSV from "../hooks/useCSV";
 
@@ -49,7 +49,7 @@ function Home() {
 							verifyInput(searchParams.get("q"), region.RegionName) && 
 								(
 									<div key={region.RegionName}>
-										<ListingCardList region={region.RegionName}/>
+										<FeaturedListingCardList region={region.RegionName}/>
 									</div>
 								)
 							))
