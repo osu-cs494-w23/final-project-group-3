@@ -11,6 +11,7 @@ const ChartContainer = styled.div`
     margin: 15px;
     margin-top: 0;
     margin-bottom: 0;
+    border-bottom: 0;
 `
  
 function PriceHistoryChart(props) {
