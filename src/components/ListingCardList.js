@@ -24,7 +24,6 @@ function ListingCardList(props) {
     }
 
     function removeFavoriteListing(listingId) {
-        // let newFavoriteListings = delete favoriteListings[listingId]
         const newFavoriteListings = {
             ...favoriteListings
         }
@@ -51,11 +50,7 @@ function ListingCardList(props) {
             <ListingList>
                 {listings}
             </ListingList>
-            {/* {console.log("favorites:", favorites)} */}
             {console.log("getFavoriteListings", getFavoriteListings())}
-            {/* {listings.map(listing => {
-                console.log("listing:", listing.props)
-            })} */}
         </>
     )
 }

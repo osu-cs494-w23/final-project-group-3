@@ -1,7 +1,5 @@
 import styled from '@emotion/styled/macro'
 import { useState } from 'react'
-import React, { useCallback } from 'react'
-
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
@@ -24,6 +22,7 @@ const ImageContainer = styled.div`
         position: relative;
     }
 `
+
 const FavoriteButton = styled.button`
     padding: 0;
     border: none;
@@ -54,13 +53,11 @@ function ListingCard(props) {
             removeFavoriteListing(id)
         }
         setFavorite(!favorite)
-
     }
 
     return (
         <ListingContainer >
             <ImageContainer>
-            {/* <FavoriteButton onClick={() => setFavorite(!favorite)}>{buttonImage}</FavoriteButton> */}
             <FavoriteButton onClick={handleFavoriteChange}>{buttonImage}</FavoriteButton>
                 <img src="https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg" alt="example image for listing" />
             </ImageContainer>
@@ -70,10 +67,8 @@ function ListingCard(props) {
                 <p>Address, City, State</p>
                 <p>Realtor</p>
             </DataContainer>
-
         </ListingContainer>
     )
-
 }
 
 export default ListingCard
