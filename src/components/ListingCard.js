@@ -40,11 +40,7 @@ const DataContainer = styled.div`
 
 function ListingCard(props) {
     const id = props.id
-    // const addFavoriteListing = props.createFavoriteListingsCallback
-    // const removeFavoriteListing = props.removeFavoriteListing
-
-    const {favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings} = useOutletContext()
-
+    const { addFavoriteListing, removeFavoriteListing } = useOutletContext()
     const [favorite, setFavorite] = useState(false)
 
     let buttonImage = favorite ? '❤️' : '🤍'

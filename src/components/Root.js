@@ -37,20 +37,9 @@ function Root(props) {
       <div className="App">
         <Header />
         <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <p>
-            {/* Edit <code>src/App.js</code> and save to reload. */}
-          </p>
           <BodyContainer>
             <Outlet context={{favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings}} />
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
+            {/* {console.log("favoriteListings from Root:", favoriteListings)} */}
           </BodyContainer>
         </header>
       </div>

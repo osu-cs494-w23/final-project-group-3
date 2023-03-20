@@ -13,46 +13,14 @@ const ListingList = styled.ul`
 
 function ListingCardList(props) {
     const region = props.region ? props.region : "your area"
-    // const getFavoriteListings = props.getFavoriteListings
-
-    const {favoriteListings, addFavoriteListing, removeFavoriteListing, getFavoriteListings} = useOutletContext()
-    console.log("In ListingCardList", favoriteListings)
-
-    // const [ favoriteListings, setFavoriteListings ] = useState({})
-
-    // function addFavoriteListing(listingId, regionId, type, uipt, status) {
-    //     let newFavoriteListings = {
-    //         ...favoriteListings,
-    //     }
-    //     newFavoriteListings[listingId] = {region_id: regionId, type: type, uipt: uipt, status: status}
-    //     setFavoriteListings(newFavoriteListings)
-    // }
-
-    // function removeFavoriteListing(listingId) {
-    //     const newFavoriteListings = {
-    //         ...favoriteListings
-    //     }
-    //     delete newFavoriteListings[listingId]
-    //     setFavoriteListings(newFavoriteListings)
-    // }
-
-    // function getFavoriteListings() {
-    //     return favoriteListings
-    // }
-
     let id = 0
+
     const listings = [
-        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>,
-        // <ListingCard createFavoriteListingsCallback={addFavoriteListing} removeFavoriteListing={removeFavoriteListing} id={++id}/>
         <ListingCard context={useOutletContext} id={++id}/>,
         <ListingCard context={useOutletContext} id={++id}/>,
         <ListingCard context={useOutletContext} id={++id}/>,
         <ListingCard context={useOutletContext} id={++id}/>,
         <ListingCard context={useOutletContext} id={++id}/>
-
     ]
 
     return (
@@ -61,7 +29,6 @@ function ListingCardList(props) {
             <ListingList>
                 {listings}
             </ListingList>
-            {console.log("getFavoriteListings", getFavoriteListings())}
         </>
     )
 }
