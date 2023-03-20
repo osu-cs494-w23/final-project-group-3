@@ -3,6 +3,8 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "./components/Root";
 import RedfinTest from "./components/RedfinTest";
 import History from './components/History';
+import SearchListingsPage from "./components/SearchListingsPage";
+import {css, Global} from "@emotion/react";
 import Favorites from "./components/Favorites";
 
 function App() {
@@ -20,6 +22,10 @@ function App() {
           element: <History />
         },
         {
+          path: "/search",
+          element: <SearchListingsPage />
+        },
+        {
           path: "/favorites",
           element: <Favorites />
         }
@@ -28,7 +34,26 @@ function App() {
   ]);
 
   return (
+      <div>
+        <Global
+            styles={css`
+            body {
+              margin: 0;
+              padding: 0;
+              min-height: 100vh;
+              max-width: 100vw;
+            }
+          `}
+        />
+        <Global
+            styles={{
+              'body.noScroll': {
+                overflow: 'hidden',
+              },
+            }}
+        />
     <RouterProvider router={router}/>
+        </div>
   )
 }
 
