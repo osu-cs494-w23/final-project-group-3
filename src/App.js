@@ -6,6 +6,7 @@ import SearchListingsPage from "./components/SearchListingsPage";
 import {css, Global} from "@emotion/react";
 import Favorites from "./components/Favorites";
 import Home from "./components/Home"
+import IndividualListing from "./components/IndividualListing";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,11 +28,15 @@ function App() {
         },
         {
           path: "/search",
-          element: <SearchListingsPage />
+          element: <SearchListingsPage />,
         },
         {
           path: "/favorites",
           element: <Favorites />
+        },
+        {
+          path: "/individualListing",
+          element: <IndividualListing />
         }
       ]
     }
