@@ -28,7 +28,6 @@ function Favorites() {
         <>
             <HeadingContainer>
                 <Title>Your favorite listings</Title>
-                <p>Filters?</p>
             </HeadingContainer>
             <ListingGrid>
                 {listingIds.map(id => {
