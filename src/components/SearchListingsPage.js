@@ -2,6 +2,7 @@ import styled from "@emotion/styled/macro";
 import { useState } from "react";
 import { useRedfinApiPropertyListingsFromLocation} from "../hooks/useRedfinApi";
 import ListingCard from "./ListingCard";
+import Loading from "./Loading";
 
 function SearchListingsPage(props) {
   const Container = styled.div({
@@ -122,7 +123,7 @@ function SearchResults(props) {
           <Heading>Search Results</Heading>
         </HeadingContainer>
         { (searchResults.isError) && <div>Something went wrong ...</div> }
-        { (searchResults.isLoading) && <div>Loading ...</div> }
+        { (searchResults.isLoading) && <div><Loading /></div> }
         { (!searchResults.isError) && (!searchResults.isLoading) && searchResults.data.map((searchResult) => {
           const regionName = searchResult['region_info']['subName'];
           const regionId = searchResult['region_info']['id'];

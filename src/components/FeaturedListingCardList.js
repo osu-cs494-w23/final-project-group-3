@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom";
 
 import { useRedfinApiPropertyListingsFromLocation } from '../hooks/useRedfinApi'
 import ListingCard from './ListingCard'
+import Loading from './Loading';
 
 const ListingList = styled.ul`
     // border: 1px solid dimgray;
@@ -23,7 +24,7 @@ function FeaturedListingCardList(props) {
         <FeaturedListingsContainer>
             <h1>Featured listings in {region}</h1>
                 { (apiResults.isError) && <div>Something went wrong ...</div> }
-                { (apiResults.isLoading) && <div>Loading ...</div> }
+                { (apiResults.isLoading) && <div><Loading /></div> }
                 <ListingList>
                 { (!apiResults.isError) && (!apiResults.isLoading) && apiResults.data.map((listing) => {
                     const regionId = listing['region_info']['id'];

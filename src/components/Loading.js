@@ -1,8 +1,10 @@
-import React from "react"
+import './loading.css'
 
 function Loading() {
     return (
-        <h1>Loading...</h1>
+        <>
+            <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        </>
     )
 }
 
