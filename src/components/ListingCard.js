@@ -9,21 +9,12 @@ const breakpoints = {
     med: 1024
 }
 
-const media = `
-    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
-        font-size: 24px;
-    }
-    @media (max-width: ${breakpoints.sm}px) {
-        font-size: 32px;
-    }
-`
-
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
     margin: 5px;
     padding: 5px;
     background-color: ghostwhite;
-    min-width: 245px;
+    min-width: 210px;
     // min-width: 10vw;
     max-width: 300px;
     display: flex;
@@ -42,7 +33,13 @@ const FavoriteButton = styled.button`
 `
 
 const DataContainer = styled.div`
-    font-size: 12px;
+    font-size: 10px;
+    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
+        font-size: 14px;
+    }
+    @media (max-width: ${breakpoints.sm}px) {
+        font-size: 24px;
+    }
 `
 
 const ArticleContainer = styled.article`
