@@ -101,14 +101,6 @@ function History() {
 
     return (
         <>
-            {/* <SearchContainer onSubmit={e => {
-                e.preventDefault()
-                setSearchParams({ q: inputQuery })
-                console.log(searchParams.get("q"))
-            }}>
-                <Input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/>
-                <Button type="submit">Search</Button>
-            </SearchContainer> */}
             <SearchBar />
             {isLoading && <Loading />}
             {regions && searchParams.get("q")
