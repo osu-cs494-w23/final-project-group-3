@@ -14,30 +14,30 @@ function App() {
       path: "/",
       element: <Root></Root>,
       children: [
-		{
-			path: "/",
-			element: <Home></Home>
-		},
-        {
-          path: "/redfin/test",
-          element: <RedfinTest></RedfinTest>
-        },
-        {
-          path: "/history",
-          element: <History />
-        },
-        {
-          path: "/search",
-          element: <SearchListingsPage />,
-        },
-        {
-          path: "/favorites",
-          element: <Favorites />
-        },
-        {
-          path: "/individualListing",
-          element: <IndividualListing />
-        }
+    {
+      path: "/",
+      element: <Home></Home>
+     },
+          {
+            path: "/redfin/test",
+            element: <RedfinTest></RedfinTest>
+          },
+          {
+            path: "/history",
+            element: <History />
+          },
+          {
+            path: "/search",
+            element: <SearchListingsPage />,
+          },
+          {
+            path: "/favorites",
+            element: <Favorites />
+          },
+          {
+            path: "/individualListing",
+            element: <IndividualListing />
+          }
       ]
     }
   ]);
