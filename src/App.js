@@ -47,8 +47,9 @@ function App() {
               min-height: 100vh;
               max-width: 100vw;
               overflow-y: hidden;
-              // background-color: AliceBlue;
-              background-color: lightgrey;
+              background-color: AliceBlue;
+              // background-color: lightgrey;
+              // background-color: ghostwhite;
             }
           `}
         />
