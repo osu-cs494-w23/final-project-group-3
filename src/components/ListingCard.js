@@ -9,13 +9,20 @@ const ListingContainer = styled.span`
     margin: 5px;
     padding: 5px;
     background-color: ghostwhite;
-    min-width: 10vw;
+    min-width: 245px;
+    // min-width: 10vw;
+    max-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
 `
 
 const FavoriteButton = styled.button`
     border: none;
     background: none;
-    padding: 5px;
+    padding: 10px;
+    padding-top: 15px;
 `
 
 const DataContainer = styled.div`
@@ -24,7 +31,7 @@ const DataContainer = styled.div`
 
 const ArticleContainer = styled.article`
   background-color: white;
-  border: 1px solid dimgray;
+//   border: 1px solid dimgray;
   display: block;
   margin-bottom: 5px;
   width: 15vw;
@@ -33,6 +40,7 @@ const ArticleContainer = styled.article`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  text-align: right;
 `;
 
 function ListingCard(props) {
