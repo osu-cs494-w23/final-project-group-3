@@ -2,7 +2,6 @@
 
 import styled from '@emotion/styled/macro'
 import { useOutletContext } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import {css} from "@emotion/react";
 
