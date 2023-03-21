@@ -51,6 +51,7 @@ const CaptionContainer = styled.div`
     margin: 15px;
     margin-top: 0;
     background-color: ghostwhite;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
 
 function getDates(region) {

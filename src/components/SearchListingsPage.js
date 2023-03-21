@@ -32,7 +32,7 @@ function SearchFilterBar(props) {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "lightgray",
+    backgroundColor: "gainsboro",
   });
   const Input = styled.input({
     width: "120px",
@@ -87,7 +87,7 @@ function SearchResults(props) {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "lightgray",
+    // backgroundColor: "lightgray",
   });
 
   const HeadingContainer = styled.div({
@@ -95,7 +95,7 @@ function SearchResults(props) {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "lightgray",
+    // backgroundColor: "lightgray",
   });
 
   const Heading = styled.h1({

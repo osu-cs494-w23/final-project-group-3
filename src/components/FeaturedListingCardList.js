@@ -17,32 +17,31 @@ const FeaturedListingsContainer = styled.div`
 
 function FeaturedListingCardList(props) {
     const region = props.region ? props.region : "your area"
-    let id = 0
-
-    // const [listings] = useRedfinApiPropertyListingsFromLocation(region,  null, false, 5)
-    // // console.log(listings)
-    // const listingsArray = listings.data
-    // // console.log(listingsArray)
-    // const listingsData = listingsArray.map(listing => listing.homes[0].homeData)
-    // console.log("listingsData", listingsData)
-    // {listingsData.map(listing => console.log("propertyId", listing.propertyId, "listing", listing))}
-    // // if (listingsData[0].propertyId)
-
-    const placeholderListings = [
-        <ListingCard key={id} context={useOutletContext} id={++id}/>,
-        <ListingCard key={id} context={useOutletContext} id={++id}/>,
-        <ListingCard key={id} context={useOutletContext} id={++id}/>,
-        <ListingCard key={id} context={useOutletContext} id={++id}/>,
-        <ListingCard key={id} context={useOutletContext} id={++id}/>
-    ]
+    const [apiResults] = useRedfinApiPropertyListingsFromLocation(region,  {}, false, 5)
 
     return (
         <FeaturedListingsContainer>
             <h1>Featured listings in {region}</h1>
-            <ListingList>
-                {placeholderListings}
-                {/* {listingsData.map(listing => <ListingCard key={listing.propertyId} id={listing.propertyId} data={listing} context={useOutletContext}/>)} */}
-            </ListingList>
+                { (apiResults.isError) && <div>Something went wrong ...</div> }
+                { (apiResults.isLoading) && <div>Loading ...</div> }
+                <ListingList>
+                { (!apiResults.isError) && (!apiResults.isLoading) && apiResults.data.map((listing) => {
+                    const regionId = listing['region_info']['id'];
+                    const regionType = listing['region_info']['type'];
+                    const propertyListings = listing['homes'];
+                    return (
+                        <>
+                            {propertyListings && propertyListings.map((propertyListing) => {
+                                const homeData = propertyListing['homeData'];
+                                const propertyId = homeData['propertyId'];
+                                return(
+                                    <ListingCard key={propertyId} id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
+                                );
+                            })}
+                        </>
+                    )
+                }) }
+                </ListingList>
         </FeaturedListingsContainer>
     )
 }
