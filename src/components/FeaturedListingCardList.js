@@ -17,7 +17,7 @@ const FeaturedListingsContainer = styled.div`
 
 function FeaturedListingCardList(props) {
     const region = props.region ? props.region : "your area"
-    const [apiResults] = useRedfinApiPropertyListingsFromLocation(region,  null, false, 5)
+    const [apiResults] = useRedfinApiPropertyListingsFromLocation(region,  {}, false, 5)
 
     return (
         <FeaturedListingsContainer>
