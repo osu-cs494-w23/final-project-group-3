@@ -42,26 +42,30 @@ function FeaturedListingCardList(props) {
                 {/* {placeholderListings} */}
                 { (apiResults.isError) && <div>Something went wrong ...</div> }
                 { (apiResults.isLoading) && <div>Loading ...</div> }
+                <ListingList>
+
                 { (!apiResults.isError) && (!apiResults.isLoading) && apiResults.data.map((listing) => {
                     const regionName = listing['region_info']['subName'];
                     const regionId = listing['region_info']['id'];
                     const regionType = listing['region_info']['type'];
                     const propertyListings = listing['homes'];
                     return (
-                        <ListingList>
-                        {propertyListings && propertyListings.map((propertyListing) => {
+                        <>
+                            {propertyListings && propertyListings.map((propertyListing) => {
 
-                            const homeData = propertyListing['homeData'];
-                            const propertyId = homeData['propertyId'];
-        
-                            return(
-                                <ListingCard key={propertyId} id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
-                            );
-                            
-                          })}
-                        </ListingList>
+                                const homeData = propertyListing['homeData'];
+                                const propertyId = homeData['propertyId'];
+            
+                                return(
+                                    <ListingCard key={propertyId} id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
+                                );
+                                
+                            })}
+                        </>
                     )
                 }) }
+                </ListingList>
+
                 {/* {listingsData.map(listing => <ListingCard key={listing.propertyId} id={listing.propertyId} data={listing} context={useOutletContext}/>)} */}
         </FeaturedListingsContainer>
     )
