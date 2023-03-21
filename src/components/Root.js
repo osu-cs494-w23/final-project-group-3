@@ -10,11 +10,11 @@ function Root(props) {
 
   const [ favoriteListings, setFavoriteListings ] = useState({})
 
-  function addFavoriteListing(listingId, regionId, type, uipt, status) {
+  function addFavoriteListing(listingId, regionId, type, uipt, status, homeData) {
       let newFavoriteListings = {
           ...favoriteListings,
       }
-      newFavoriteListings[listingId] = {region_id: regionId, type: type, uipt: uipt, status: status}
+      newFavoriteListings[listingId] = {region_id: regionId, type: type, uipt: uipt, status: status, homeData: homeData}
       setFavoriteListings(newFavoriteListings)
   }
   
