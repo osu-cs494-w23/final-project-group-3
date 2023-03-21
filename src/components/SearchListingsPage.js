@@ -91,7 +91,6 @@ function SearchResults(props) {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "lightgray",
   });
 
   const HeadingContainer = styled.div({
@@ -99,7 +98,6 @@ function SearchResults(props) {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "lightgray",
   });
 
   const Heading = styled.h1({

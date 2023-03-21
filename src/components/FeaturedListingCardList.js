@@ -7,7 +7,6 @@ import ListingCard from './ListingCard'
 import Loading from './Loading';
 
 const ListingList = styled.ul`
-    // border: 1px solid dimgray;
     display: flex;
     justify-content: center;
     padding: 0;
