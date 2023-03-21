@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
 import styled from '@emotion/styled/macro'
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import {css} from "@emotion/react";
 
 const ListingContainer = styled.span`
@@ -73,31 +73,46 @@ function ListingCard(props) {
 
     const articleStyle = mlsId && dataSourceUrl ?  css`
         background-image: url(${imageUrl})` : css` 
-        background-image: url("https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg")`;
+        background-image: url("https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg")`
 
-    const price = homeData?.priceInfo?.amount?.value ? formatPrice(homeData.priceInfo.amount.value) : 'Price not listed';
-    const beds = homeData?.beds?.value ? homeData.beds.value : 0;
-    const baths = homeData?.baths?.value ? homeData.baths.value : 0;
-    const sqft = homeData?.sqftInfo?.amount?.value ? homeData.sqftInfo.amount.value : 0;
-    const propertyType = homeData?.propertyType ? formatPropertyType(homeData.propertyType) : 'Unknown home type';
-    const address = homeData?.addressInfo?.formattedStreetLine ? homeData.addressInfo.formattedStreetLine : 'Unknown address';
-    const city = homeData?.addressInfo?.city ? homeData.addressInfo.city : 'Unknown city';
-    const state = homeData?.addressInfo?.state ? homeData.addressInfo.state : 'Unknown state';
-    const broker = homeData?.brokers?.listingBrokerAndAgent?.agentName ? homeData.brokers.listingBrokerAndAgent.agentName : 'No agent';
-    const agent = homeData?.brokers?.listingBrokerAndAgent?.brokerName ? homeData.brokers.listingBrokerAndAgent.brokerName : 'No broker';
+    const housingData = {
+    
+        price: homeData?.priceInfo?.amount?.value ? formatPrice(homeData.priceInfo.amount.value) : 'Price not listed',
+        beds: homeData?.beds?.value ? homeData.beds.value : 0,
+        baths: homeData?.baths?.value ? homeData.baths.value : 0,
+        sqft: homeData?.sqftInfo?.amount?.value ? homeData.sqftInfo.amount.value : 0,
+        propertyType: homeData?.propertyType ? formatPropertyType(homeData.propertyType) : 'Unknown home type',
+        address: homeData?.addressInfo?.formattedStreetLine ? homeData.addressInfo.formattedStreetLine : 'Unknown address',
+        city: homeData?.addressInfo?.city ? homeData.addressInfo.city : 'Unknown city',
+        state: homeData?.addressInfo?.state ? homeData.addressInfo.state : 'Unknown state',
+        broker: homeData?.brokers?.listingBrokerAndAgent?.agentName ? homeData.brokers.listingBrokerAndAgent.agentName : 'No agent',
+        agent: homeData?.brokers?.listingBrokerAndAgent?.brokerName ? homeData.brokers.listingBrokerAndAgent.brokerName : 'No broker',
+
+        status: homeData?.listingMetadata?.searchStatus ? 'Active' : 'Not Active',
+        year: homeData?.yearBuilt?.yearBuilt?.value ? homeData.yearBuilt.yearBuilt.value : 'Year built not available',
+        lotSize: homeData?.lotSize?.amount?.value ? homeData.lotSize.amount.value : 'n/a',
+        fullBath: homeData?.fullBaths?.value ? homeData.fullBaths.value : "none",
+        halfBath: homeData?.partialBaths?.value ? homeData.partialBaths.value : "none",
+        
+        daysOnMarket: homeData?.daysOnMarket?.daysOnMarket?.value ? homeData.daysOnMarket.daysOnMarket.value : 'not available',
+        daysOnApp: homeData?.daysOnMarket?.timeOnRedfin?.seconds ? Math.round(homeData.daysOnMarket.timeOnRedfin.seconds/86400) : 'not available',
+        tour: homeData?.listingMetadata?.hasVirtualTour ? homeData.photosInfo.scanUrl : 'not available',
+    }
 
     return (
+        <Link to="/individualListing" state = {housingData}>
         <ListingContainer >
           <ArticleContainer css={articleStyle}>
             <FavoriteButton onClick={handleFavoriteChange}>{buttonImage}</FavoriteButton>
           </ArticleContainer>
           <DataContainer>
-              <h2>{price}</h2>
-              <p>{beds} bds | {baths} ba | {sqft} sqft | {propertyType}</p>
-              <p>{address}, {city}, {state}</p>
-              <p>{agent + " | " + broker}</p>
+              <h2>{housingData.price}</h2>
+              <p>{housingData.beds} bds | {housingData.baths} ba | {housingData.sqft} sqft | {housingData.propertyType}</p>
+              <p>{housingData.address}, {housingData.city}, {housingData.state}</p>
+              <p>{housingData.agent + " | " + housingData.broker}</p>
           </DataContainer>
         </ListingContainer>
+        </Link>
     )
 }
 
