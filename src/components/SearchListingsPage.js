@@ -38,11 +38,13 @@ function SearchFilterBar(props) {
     width: "120px",
     height: "20px",
     margin: "5px",
+    'border-radius': "5px"
   });
   const Button = styled.button({
     width: "100px",
     height: "25px",
     margin: "5px",
+    'border-radius': "5px"
   });
 
   const onSubmit = (event) => {
