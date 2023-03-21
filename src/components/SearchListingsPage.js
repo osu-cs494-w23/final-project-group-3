@@ -33,6 +33,7 @@ function SearchFilterBar(props) {
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "gainsboro",
+    position: "sticky"
   });
   const Input = styled.input({
     width: "120px",
