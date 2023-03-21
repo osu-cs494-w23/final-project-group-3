@@ -16,6 +16,7 @@ const ListingContainer = styled.span`
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: center;
+    box-shadow: 1px 1px 4px;
 `
 
 const FavoriteButton = styled.button`
