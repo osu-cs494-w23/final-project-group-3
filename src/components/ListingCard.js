@@ -4,6 +4,20 @@ import styled from '@emotion/styled/macro'
 import { useOutletContext } from "react-router-dom";
 import {css} from "@emotion/react";
 
+const breakpoints = {
+    sm: 768,
+    med: 1024
+}
+
+const media = `
+    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
+        font-size: 24px;
+    }
+    @media (max-width: ${breakpoints.sm}px) {
+        font-size: 32px;
+    }
+`
+
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
     margin: 5px;
@@ -16,7 +30,8 @@ const ListingContainer = styled.span`
     flex-wrap: wrap;
     align-content: flex-start;
     justify-content: center;
-    box-shadow: 1px 1px 4px;
+    // box-shadow: 1px 1px 4px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
 
 const FavoriteButton = styled.button`
