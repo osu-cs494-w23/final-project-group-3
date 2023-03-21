@@ -126,7 +126,7 @@ function SearchResults(props) {
           const regionType = searchResult['region_info']['type'];
           const propertyListings = searchResult['homes'];
           return (
-              <Container id={regionId}>
+              <Container key={regionId}>
                 <HeadingContainer>
                   <Heading>{regionName}</Heading>
                 </HeadingContainer>
@@ -137,7 +137,7 @@ function SearchResults(props) {
                     const propertyId = homeData['propertyId'];
 
                     return(
-                        <ListingCard id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
+                        <ListingCard key={propertyId} id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
                     );
                   })}
                 </ResultsContainer>

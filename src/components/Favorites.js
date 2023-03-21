@@ -31,7 +31,14 @@ function Favorites() {
                 <p>Filters?</p>
             </HeadingContainer>
             <ListingGrid>
-                {listingIds.map(id => <ListingCard key={id[0]} context={useOutletContext} id={id[0]} />)}
+                {listingIds.map(id => {
+                  const listing = favoritesList[id];
+                  console.log(listing);
+                  console.log(id);
+                  const { regionId, type, homeData } = listing;
+                  return <ListingCard key={id} id={id} regionId={regionId} type={type} homeData={homeData} context={useOutletContext} />
+                }
+                )}
             </ListingGrid>
         </>
     )
