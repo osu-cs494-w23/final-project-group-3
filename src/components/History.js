@@ -71,6 +71,28 @@ function verifyInput(input, region) {
     )
 }
 
+function SearchBar(props) {
+    const [ searchParams, setSearchParams ] = useSearchParams()
+    const [ inputQuery, setInputQuery ] = useState(searchParams.get("q") || "")
+    const [searchData, setSearchData] = useState({
+        location: "Corvallis Oregon",
+        searchFilters: {
+          'num_homes': '5',
+        }
+    })
+
+    return (
+        <SearchContainer onSubmit={e => {
+            e.preventDefault()
+            setSearchParams({ q: inputQuery })
+            console.log(searchParams.get("q"))
+        }}>
+            <Input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/>
+            <Button type="submit">Search</Button>
+        </SearchContainer>
+    )
+}
+
 function History() {
     const [ searchParams, setSearchParams ] = useSearchParams()
     const [ inputQuery, setInputQuery ] = useState(searchParams.get("q") || "")
@@ -79,14 +101,15 @@ function History() {
 
     return (
         <>
-            <SearchContainer onSubmit={e => {
+            {/* <SearchContainer onSubmit={e => {
                 e.preventDefault()
                 setSearchParams({ q: inputQuery })
                 console.log(searchParams.get("q"))
             }}>
                 <Input placeholder="Enter a region" value={inputQuery} onChange={e => setInputQuery(e.target.value)}/>
                 <Button type="submit">Search</Button>
-            </SearchContainer>
+            </SearchContainer> */}
+            <SearchBar />
             {isLoading && <Loading />}
             {regions && searchParams.get("q")
                 && regions.map(region => (
