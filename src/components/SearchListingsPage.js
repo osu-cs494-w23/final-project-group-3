@@ -112,6 +112,14 @@ function SearchResults(props) {
     padding: "0px",
   });
 
+  const ListingGrid = styled.div`
+    // border: 1px solid dimgray;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: center;
+    padding: 0;
+`
+
   const searchResults = props.searchResults;
 
   console.log(searchResults);
@@ -130,7 +138,7 @@ function SearchResults(props) {
                 <HeadingContainer>
                   <Heading>{regionName}</Heading>
                 </HeadingContainer>
-                <ResultsContainer>
+                <ListingGrid>
                   {propertyListings.map((propertyListing) => {
 
                     const homeData = propertyListing['homeData'];
@@ -140,7 +148,7 @@ function SearchResults(props) {
                         <ListingCard key={propertyId} id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
                     );
                   })}
-                </ResultsContainer>
+                </ListingGrid>
               </Container>
           );
         })}
