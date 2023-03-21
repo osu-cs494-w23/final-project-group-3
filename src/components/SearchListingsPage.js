@@ -18,12 +18,10 @@ function SearchListingsPage(props) {
     }
   });
 
-  const [searchResults] = useRedfinApiPropertyListingsFromLocation(searchData.location, searchData.searchFilters, true, 1);
-
   return (
       <Container>
         <SearchFilterBar setSearchData={setSearchData}></SearchFilterBar>
-        <SearchResults searchResults={searchResults}></SearchResults>
+        <SearchResults searchData={searchData}></SearchResults>
       </Container>
   )
 }
@@ -56,9 +54,10 @@ function SearchFilterBar(props) {
     const minBaths = document.getElementById("min-baths-form").value;
     const searchFilters = {
       'min_price': Math.min(minPrice, maxPrice),
-      'max_price': Math.max(minPrice, maxPrice),
-      'min_beds': minBeds,
-      'min_baths': minBaths,
+      'max_price': Math.max(minPrice, maxPrice) === 0 ? 999999999 : Math.max(minPrice, maxPrice),
+      'num_beds': minBeds === "" ? 0 : minBeds,
+      'num_baths': minBaths === "" ? 0 : minBaths,
+      'num_homes': 100,
     };
     const searchData = {
       'location': location,
@@ -71,7 +70,7 @@ function SearchFilterBar(props) {
   return (
     <Container>
       <form onSubmit={(event) => onSubmit(event)}>
-        <Input type="text" placeholder="City, ZIP, Address" required />
+        <Input id={"location-form"} type="text" placeholder="City, ZIP, Address" required />
         <Input id={"min-price-form"} type="number" placeholder="Min Price" min={0}  />
         <Input id={"max-price-form"} type="number" placeholder="Max Price" min={0} />
         <Input id={"min-beds-form"} type="number" placeholder="Min Beds" min={0} />
@@ -99,14 +98,6 @@ function SearchResults(props) {
     backgroundColor: "lightgray",
   });
 
-  const ResultsContainer = styled.div({
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "lightgray",
-  });
-
   const Heading = styled.h1({
     margin: "0px",
     padding: "0px",
@@ -120,16 +111,17 @@ function SearchResults(props) {
     padding: 0;
 `
 
-  const searchResults = props.searchResults;
-
-  console.log(searchResults);
+  const searchData = props.searchData;
+  const [searchResults] = useRedfinApiPropertyListingsFromLocation(searchData.location, searchData.searchFilters, true);
   return (
       <Container>
         <HeadingContainer>
           <Heading>Search Results</Heading>
         </HeadingContainer>
+        { (searchResults.isError) && <div>Something went wrong ...</div> }
+        { (searchResults.isLoading) && <div>Loading ...</div> }
         { (!searchResults.isError) && (!searchResults.isLoading) && searchResults.data.map((searchResult) => {
-          const regionName = searchResult['region_info']['name'];
+          const regionName = searchResult['region_info']['subName'];
           const regionId = searchResult['region_info']['id'];
           const regionType = searchResult['region_info']['type'];
           const propertyListings = searchResult['homes'];
@@ -139,7 +131,8 @@ function SearchResults(props) {
                   <Heading>{regionName}</Heading>
                 </HeadingContainer>
                 <ListingGrid>
-                  {propertyListings.map((propertyListing) => {
+                  { (!propertyListings) && <div>No listings found</div>}
+                  {propertyListings && propertyListings.map((propertyListing) => {
 
                     const homeData = propertyListing['homeData'];
                     const propertyId = homeData['propertyId'];
