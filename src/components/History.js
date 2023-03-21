@@ -72,7 +72,7 @@ function verifyInput(input, region) {
 }
 
 function History() {
-    const [ searchParams, setSearchParams ] = useSearchParams()
+    const [ searchParams, setSearchParams ] = useSearchParams({ q: "Corvallis" })
     const [ inputQuery, setInputQuery ] = useState(searchParams.get("q") || "")
     const { data, isLoading } = useCSV(csvFilePath)
     const regions = data.data
