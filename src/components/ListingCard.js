@@ -6,6 +6,11 @@ import {css} from "@emotion/react";
 
 import './ListingCard.css';
 
+const breakpoints = {
+    sm: 768,
+    med: 1024
+}
+
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
     margin: 5px;
