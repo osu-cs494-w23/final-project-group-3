@@ -47,9 +47,6 @@ function FeaturedListingCardList(props) {
                                                 homeData={homeData} />
                                         )
                                     }  
-                                    console.log("propertyId", propertyId)
-                                    console.log("propertyIds", propertyIds)
-                                    console.log("properties", properties)
                                 })}
                             </>
                         )
