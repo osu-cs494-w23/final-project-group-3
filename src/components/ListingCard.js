@@ -4,6 +4,8 @@ import styled from '@emotion/styled/macro'
 import { Link, useOutletContext } from "react-router-dom";
 import {css} from "@emotion/react";
 
+import './ListingCard.css';
+
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
     margin: 5px;
