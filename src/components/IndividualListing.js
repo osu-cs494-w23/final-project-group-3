@@ -114,12 +114,15 @@ const ListingNavItem = styled.div`
 function IndividualListing(props){
 
     const location = useLocation();
-    const id = props.id
+    const data = location.state;
+    console.log(data);
+
+    const id = data.id
     const regionId = props.regionId;
     const type = props.type;
     const homeData = props.homeData;
     const { getFavoriteListings, addFavoriteListing, removeFavoriteListing } = useOutletContext()
-    const favorites = getFavoriteListings()
+    const favorites = getFavoriteListings();
 
     let buttonImage = favorites[id] ? '❤️' : '🤍'
 
@@ -131,9 +134,6 @@ function IndividualListing(props){
             removeFavoriteListing(id)
         }
     }
-
-    const data = location.state;
-    console.log(data);
 
     const mlsIdSuffix = data.mlsId?.slice(-3);
     const imageUrl1 = `${data.prefix}/${data.dataSourceUrl}/bigphoto/${mlsIdSuffix}/${data.mlsId}_0.webp`;
