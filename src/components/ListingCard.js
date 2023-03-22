@@ -3,6 +3,7 @@
 import styled from '@emotion/styled/macro'
 import { Link, useOutletContext } from "react-router-dom";
 import {css} from "@emotion/react";
+import './ListingCard.css';
 
 const breakpoints = {
     sm: 768,
