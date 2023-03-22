@@ -2,7 +2,6 @@
 
 import styled from '@emotion/styled/macro'
 import { useOutletContext } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import {css} from "@emotion/react";
 
@@ -138,18 +137,28 @@ function IndividualListing(props){
 
     const mlsIdSuffix = data.mlsId?.slice(-3);
     const imageUrl1 = `${data.prefix}/${data.dataSourceUrl}/bigphoto/${mlsIdSuffix}/${data.mlsId}_0.webp`;
-    const imageUrl2 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_2_0.webp`;
-    const imageUrl3 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_6_0.webp`;
-    const imageUrl4 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_8_0.webp`;
-    const imageUrl5 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_11_0.webp`;
-    const imageUrl6 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_13_0.webp`;
-    const imageUrl7 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_16_0.webp`;
-    const imageUrl8 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_18_0.webp`;
-    const imageUrl9 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_21_0.webp`;
-    const imageUrl10 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_23_0.webp`;
-    const imageUrl11 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_26_0.webp`;
-    const imageUrl12 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_28_0.webp`;
-    const imageUrl13 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_31_0.webp`;
+    const imageUrl2 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_1_0.webp`;
+    const imageUrl3 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_2_0.webp`;
+    const imageUrl4 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_3_0.webp`;
+    const imageUrl5 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_4_0.webp`;
+    const imageUrl6 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_5_0.webp`;
+    const imageUrl7 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_6_0.webp`;
+    const imageUrl8 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_7_0.webp`;
+    const imageUrl9 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_8_0.webp`;
+    const imageUrl10 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_9_0.webp`;
+    const imageUrl11 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_10_0.webp`;
+    const imageUrl12 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_11_0.webp`;
+    const imageUrl13 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_12_0.webp`;
+    const imageUrl14 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_13_0.webp`;
+    const imageUrl15 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_14_0.webp`;
+    const imageUrl16 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_15_0.webp`;
+    const imageUrl17 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_16_0.webp`;
+    const imageUrl18 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_17_0.webp`;
+    const imageUrl19 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_18_0.webp`;
+    const imageUrl20 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_19_0.webp`;
+    const imageUrl21 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_20_0.webp`;
+    const imageUrl22 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_21_0.webp`;
+    const imageUrl23 = `${data.prefix}/${data.dataSourceUrl}/mbpaddedwide/${mlsIdSuffix}/genMid.${data.mlsId}_22_0.webp`;
 
     const articleStyle1 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl1})` : `picture not available`;
     const articleStyle2 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl2})` : `picture not available`;
@@ -164,6 +173,16 @@ function IndividualListing(props){
     const articleStyle11 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl11})` : `picture not available`;
     const articleStyle12 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl12})` : `picture not available`;
     const articleStyle13 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl13})` : `picture not available`;
+    const articleStyle14 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl14})` : `picture not available`;
+    const articleStyle15 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl15})` : `picture not available`;
+    const articleStyle16 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl16})` : `picture not available`;
+    const articleStyle17 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl17})` : `picture not available`;
+    const articleStyle18 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl18})` : `picture not available`;
+    const articleStyle19 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl19})` : `picture not available`;
+    const articleStyle20 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl20})` : `picture not available`;
+    const articleStyle21 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl21})` : `picture not available`;
+    const articleStyle22 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl22})` : `picture not available`;
+    const articleStyle23 = data.mlsId && data.dataSourceUrl ?  css` background-image: url(${imageUrl23})` : `picture not available`;
 
     return(
 
@@ -183,6 +202,16 @@ function IndividualListing(props){
                 <PictureContainer3 css={articleStyle11} />
                 <PictureContainer2 css={articleStyle12} />
                 <PictureContainer3 css={articleStyle13} />
+                <PictureContainer2 css={articleStyle14} />
+                <PictureContainer3 css={articleStyle15} />
+                <PictureContainer2 css={articleStyle16} />
+                <PictureContainer3 css={articleStyle17} />
+                <PictureContainer2 css={articleStyle18} />
+                <PictureContainer3 css={articleStyle19} />
+                <PictureContainer2 css={articleStyle20} />
+                <PictureContainer3 css={articleStyle21} />
+                <PictureContainer2 css={articleStyle22} />
+                <PictureContainer3 css={articleStyle23} />
 
             </PictureContainer>
             <MainListingInfo>
