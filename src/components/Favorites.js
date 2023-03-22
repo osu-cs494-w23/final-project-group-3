@@ -12,7 +12,6 @@ const Title = styled.h1`
 `
 
 const ListingGrid = styled.div`
-    // border: 1px solid dimgray;
     display: grid;
     grid-template-columns: auto auto auto auto;
     justify-content: center;
@@ -28,7 +27,6 @@ function Favorites() {
         <>
             <HeadingContainer>
                 <Title>Your favorite listings</Title>
-                <p>Filters?</p>
             </HeadingContainer>
             <ListingGrid>
                 {listingIds.map(id => {

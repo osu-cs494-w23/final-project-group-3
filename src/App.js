@@ -52,6 +52,7 @@ function App() {
               min-height: 100vh;
               max-width: 100vw;
               overflow-y: hidden;
+              font-family: Arial, Helvetica, sans-serif;
               background-color: AliceBlue;
             }
           `}

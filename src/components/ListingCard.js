@@ -3,7 +3,6 @@
 import styled from '@emotion/styled/macro'
 import { Link, useOutletContext } from "react-router-dom";
 import {css} from "@emotion/react";
-
 import './ListingCard.css';
 
 const breakpoints = {
@@ -13,25 +12,39 @@ const breakpoints = {
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
+    border-radius: 5px;
     margin: 5px;
     padding: 5px;
     background-color: ghostwhite;
-    min-width: 10vw;
+    min-width: 210px;
+    max-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
 
 const FavoriteButton = styled.button`
     border: none;
     background: none;
-    padding: 5px;
+    padding: 10px;
+    padding-top: 15px;
+    font-size: 20px;
 `
 
 const DataContainer = styled.div`
-    font-size: 12px;
+    font-size: 10px;
+    @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
+        font-size: 14px;
+    }
+    @media (max-width: ${breakpoints.sm}px) {
+        font-size: 24px;
+    }
 `
 
 const ArticleContainer = styled.article`
   background-color: white;
-  border: 1px solid dimgray;
   display: block;
   margin-bottom: 5px;
   width: 15vw;
@@ -40,6 +53,7 @@ const ArticleContainer = styled.article`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  text-align: right;
 `;
 
 function ListingCard(props) {
