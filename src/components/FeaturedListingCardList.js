@@ -50,17 +50,11 @@ function FeaturedListingCardList(props) {
                                     console.log("propertyId", propertyId)
                                     console.log("propertyIds", propertyIds)
                                     console.log("properties", properties)
-                                    // return(
-                                    //     <>
-                                    //         {properties}
-                                    //     </>
-                                    // );
                                 })}
                             </>
                         )
                     }) }
                     {properties}
-
                 </ListingList>
         </FeaturedListingsContainer>
     )
