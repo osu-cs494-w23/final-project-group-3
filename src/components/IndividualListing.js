@@ -118,9 +118,9 @@ function IndividualListing(props){
     console.log(data);
 
     const id = data.id
-    const regionId = props.regionId;
-    const type = props.type;
-    const homeData = props.homeData;
+    const regionId = data.regionId;
+    const type = data.type;
+    const homeData = data.homeData;
     const { getFavoriteListings, addFavoriteListing, removeFavoriteListing } = useOutletContext()
     const favorites = getFavoriteListings();
 
@@ -251,3 +251,4 @@ function IndividualListing(props){
 }
 
 export default IndividualListing
+

@@ -76,6 +76,9 @@ function ListingCard(props) {
     const housingData = {
 
         id: id,
+        regionId: props.regionId,
+        type: props.type,
+        homeData: props.homeData,
 
         mlsId: homeData?.mlsId,
         prefix: 'https://ssl.cdn-redfin.com/photo',
