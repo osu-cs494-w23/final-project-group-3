@@ -14,6 +14,7 @@ const PictureContainer = styled.div`
     column-rule-style: solid;
     column-gap: 30px;
     column-rule-width: 5px;
+	max-width: 1000px;
 `
 
 const FavoriteButton = styled.button`
