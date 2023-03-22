@@ -18,6 +18,8 @@ const FeaturedListingsContainer = styled.div`
 function FeaturedListingCardList(props) {
     const region = props.region ? props.region : "your area"
     const [apiResults] = useRedfinApiPropertyListingsFromLocation(region,  {}, false, 5)
+    const propertyIds = []
+    const properties = []
 
     return (
         <FeaturedListingsContainer>
@@ -25,22 +27,31 @@ function FeaturedListingCardList(props) {
                 { (apiResults.isError) && <div>Something went wrong ...</div> }
                 { (apiResults.isLoading) && <div><Loading /></div> }
                 <ListingList>
-                { (!apiResults.isError) && (!apiResults.isLoading) && apiResults.data.map((listing) => {
-                    const regionId = listing['region_info']['id'];
-                    const regionType = listing['region_info']['type'];
-                    const propertyListings = listing['homes'];
-                    return (
-                        <>
-                            {propertyListings && propertyListings.map((propertyListing) => {
-                                const homeData = propertyListing['homeData'];
-                                const propertyId = homeData['propertyId'];
-                                return(
-                                    <ListingCard key={propertyId} id={propertyId} type={regionType} regionId={regionId} homeData={homeData}></ListingCard>
-                                );
-                            })}
-                        </>
-                    )
-                }) }
+                    { (!apiResults.isError) && (!apiResults.isLoading) && apiResults.data.map((listing) => {
+                        const regionId = listing['region_info']['id'];
+                        const regionType = listing['region_info']['type'];
+                        const propertyListings = listing['homes'];
+                        return (
+                            <>
+                                {propertyListings && propertyListings.map((propertyListing) => {
+                                    const homeData = propertyListing['homeData'];
+                                    const propertyId = homeData['propertyId'];
+                                    if( !propertyIds.includes(propertyId) ) {
+                                        propertyIds.push(propertyId)
+                                        properties.push(
+                                            <ListingCard 
+                                                key={propertyId}
+                                                id={propertyId} 
+                                                type={regionType} 
+                                                regionId={regionId} 
+                                                homeData={homeData} />
+                                        )
+                                    }  
+                                })}
+                            </>
+                        )
+                    }) }
+                    {properties}
                 </ListingList>
         </FeaturedListingsContainer>
     )
