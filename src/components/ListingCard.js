@@ -73,9 +73,13 @@ function ListingCard(props) {
 
     const articleStyle = mlsId && dataSourceUrl ?  css`
         background-image: url(${imageUrl})` : css` 
-        background-image: url("https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg")`
+        background-image: url("https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg")`;
 
     const housingData = {
+
+        mlsId: homeData?.mlsId,
+        prefix: 'https://ssl.cdn-redfin.com/photo',
+        dataSourceUrl: homeData?.dataSourceId?.value,
     
         price: homeData?.priceInfo?.amount?.value ? formatPrice(homeData.priceInfo.amount.value) : 'Price not listed',
         beds: homeData?.beds?.value ? homeData.beds.value : 0,
@@ -96,23 +100,24 @@ function ListingCard(props) {
         
         daysOnMarket: homeData?.daysOnMarket?.daysOnMarket?.value ? homeData.daysOnMarket.daysOnMarket.value : 'not available',
         daysOnApp: homeData?.daysOnMarket?.timeOnRedfin?.seconds ? Math.round(homeData.daysOnMarket.timeOnRedfin.seconds/86400) : 'not available',
-        tour: homeData?.listingMetadata?.hasVirtualTour ? homeData.photosInfo.scanUrl : 'not available',
+        tour: homeData?.listingMetadata?.hasVirtualTour ? homeData.photosInfo.scanUrl : 'not available'
+
     }
 
     return (
-        <Link to="/individualListing" state = {housingData}>
         <ListingContainer >
           <ArticleContainer css={articleStyle}>
             <FavoriteButton onClick={handleFavoriteChange}>{buttonImage}</FavoriteButton>
           </ArticleContainer>
-          <DataContainer>
-              <h2>{housingData.price}</h2>
-              <p>{housingData.beds} bds | {housingData.baths} ba | {housingData.sqft} sqft | {housingData.propertyType}</p>
-              <p>{housingData.address}, {housingData.city}, {housingData.state}</p>
-              <p>{housingData.agent + " | " + housingData.broker}</p>
-          </DataContainer>
+          <Link to="/individualListing" state = {housingData} >
+            <DataContainer>
+                <h2>{housingData.price}</h2>
+                <p>{housingData.beds} bds | {housingData.baths} ba | {housingData.sqft} sqft | {housingData.propertyType}</p>
+                <p>{housingData.address}, {housingData.city}, {housingData.state}</p>
+                <p>{housingData.agent + " | " + housingData.broker}</p>
+            </DataContainer>
+          </Link>
         </ListingContainer>
-        </Link>
     )
 }
 
