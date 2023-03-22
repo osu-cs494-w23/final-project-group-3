@@ -3,6 +3,7 @@
 import styled from '@emotion/styled/macro'
 import { Link, useOutletContext } from "react-router-dom";
 import {css} from "@emotion/react";
+
 import './ListingCard.css';
 
 const breakpoints = {
@@ -61,30 +62,6 @@ function ListingCard(props) {
     const regionId = props.regionId;
     const type = props.type;
     const homeData = props.homeData;
-    const { getFavoriteListings, addFavoriteListing, removeFavoriteListing } = useOutletContext()
-    const favorites = getFavoriteListings()
-
-    let buttonImage = favorites[id] ? '❤️' : '🤍'
-
-    function handleFavoriteChange() {
-        if (!favorites[id]) {
-            addFavoriteListing(id, regionId, type, '1,2,3,4,7,8', '9', homeData)
-        }
-        else {
-            removeFavoriteListing(id)
-        }
-    }
-
-    function formatPrice(price) {
-        return "$" + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    function formatPropertyType(propertyType) {
-        return propertyType.toLowerCase()
-            .split('_')
-            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ');
-    }
 
     const mlsId = homeData?.mlsId;
     const mlsIdSuffix = mlsId?.slice(-3);
@@ -97,6 +74,8 @@ function ListingCard(props) {
         background-image: url("https://i.pinimg.com/originals/2e/dc/4b/2edc4b5f7279d8d9bfbae04a75e104a8.jpg")`;
 
     const housingData = {
+
+        id: id,
 
         mlsId: homeData?.mlsId,
         prefix: 'https://ssl.cdn-redfin.com/photo',
@@ -123,6 +102,30 @@ function ListingCard(props) {
         daysOnApp: homeData?.daysOnMarket?.timeOnRedfin?.seconds ? Math.round(homeData.daysOnMarket.timeOnRedfin.seconds/86400) : 'not available',
         tour: homeData?.listingMetadata?.hasVirtualTour ? homeData.photosInfo.scanUrl : 'not available'
 
+    }
+
+    const { getFavoriteListings, addFavoriteListing, removeFavoriteListing } = useOutletContext()
+    const favorites = getFavoriteListings()
+    let buttonImage = favorites[housingData.id] ? '❤️' : '🤍'
+
+    function handleFavoriteChange() {
+        if (!favorites[housingData.id]) {
+            addFavoriteListing(housingData.id, regionId, type, '1,2,3,4,7,8', '9', homeData)
+        }
+        else {
+            removeFavoriteListing(housingData.id)
+        }
+    }
+
+    function formatPrice(price) {
+        return "$" + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function formatPropertyType(propertyType) {
+        return propertyType.toLowerCase()
+            .split('_')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
     }
 
     return (
