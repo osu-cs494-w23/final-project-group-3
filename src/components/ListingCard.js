@@ -35,7 +35,7 @@ const FavoriteButton = styled.button`
 `
 
 const DataContainer = styled.div`
-    font-size: 10px;
+    font-size: 12px;
     @media (min-width: ${breakpoints.sm + 1}px) and (max-width: ${breakpoints.med}px) {
         font-size: 14px;
     }
@@ -76,6 +76,9 @@ function ListingCard(props) {
     const housingData = {
 
         id: id,
+        regionId: props.regionId,
+        type: props.type,
+        homeData: props.homeData,
 
         mlsId: homeData?.mlsId,
         prefix: 'https://ssl.cdn-redfin.com/photo',
