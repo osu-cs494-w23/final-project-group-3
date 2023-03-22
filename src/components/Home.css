@@ -77,8 +77,6 @@
 }
 
 #items {
-	overflow-x: scroll;
-	border: 1px solid black;
 	margin: 20px 40px;
 	min-height: 300px;
 }
