@@ -11,11 +11,11 @@ const breakpoints = {
 
 const ListingContainer = styled.span`
     border: 1px solid dimgray;
+    border-radius: 5px;
     margin: 5px;
     padding: 5px;
     background-color: ghostwhite;
     min-width: 210px;
-    // min-width: 10vw;
     max-width: 300px;
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +44,6 @@ const DataContainer = styled.div`
 
 const ArticleContainer = styled.article`
   background-color: white;
-//   border: 1px solid dimgray;
   display: block;
   margin-bottom: 5px;
   width: 15vw;
