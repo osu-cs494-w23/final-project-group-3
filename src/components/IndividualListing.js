@@ -10,7 +10,7 @@ const IndListingContainer = styled.div`
 `
 const PictureContainer = styled.div`
     top: 56px
-    width: 405px;
+    max-width: 405px;
     column-rule-style: solid;
     column-gap: 30px;
     column-rule-width: 5px;
